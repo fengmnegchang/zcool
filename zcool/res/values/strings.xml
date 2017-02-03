@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">站酷+</string>
-     <string name="zcool_all_desp">所有类列表</string>
+    <string name="zcool_all_desp">所有类列表</string>
+    <string name="zcool_webview_desp">webview</string>
 
 </resources>
