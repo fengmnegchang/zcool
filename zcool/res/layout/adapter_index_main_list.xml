@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/common_z" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageview"
+        android:layout_marginTop="10dp"
+        android:text="logo collection"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_camLiDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_title"
+        android:layout_marginTop="15dp"
+        android:text="原创作品 - 平面 - VI/CI 
+4小时前上传
+2559 人气 / 14 评论 / 102 推荐"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_camLiDes"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/imageview2"
+        android:text="seevisual "
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageview2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/text_camLiDes"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/common_z" />
+
+</RelativeLayout>

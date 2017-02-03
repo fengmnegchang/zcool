@@ -41,6 +41,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/index_focus_f_desp" >
         </activity>
+        <!-- 列表main list -->
+        <activity
+            android:name="com.open.zcool.activity.IndexMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/index_main_list_f_desp" >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
