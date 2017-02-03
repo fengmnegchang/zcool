@@ -35,6 +35,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/zcool_webview_desp" >
         </activity>
+        <!-- 站酷精选图片viewpager -->
+        <activity
+            android:name="com.open.zcool.activity.IndexFocusFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/index_focus_f_desp" >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
