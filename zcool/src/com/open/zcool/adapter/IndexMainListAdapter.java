@@ -15,7 +15,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ import com.open.android.adapter.CommonAdapter;
 import com.open.zcool.R;
 import com.open.zcool.activity.ZcoolWebViewActivity;
 import com.open.zcool.bean.IndexMainBean;
+import com.open.zcool.widget.OpenClickableSpan;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -66,7 +70,21 @@ public class IndexMainListAdapter extends CommonAdapter<IndexMainBean> {
 			viewHolder.text_author.setText(bean.getAuthor());
 			viewHolder.text_title.setText(bean.getTitle());
 			viewHolder.text_camLiDes.setText(Html.fromHtml(bean.getCamLiDes()));
-			viewHolder.text_camLiDes.setMovementMethod(LinkMovementMethod.getInstance());    
+			viewHolder.text_camLiDes.setMovementMethod(LinkMovementMethod.getInstance());   
+			CharSequence text = viewHolder.text_camLiDes.getText();   
+	        if(text instanceof Spannable){   
+	            int end = text.length();   
+	            Spannable sp = (Spannable)viewHolder.text_camLiDes.getText();   
+	            URLSpan[] urls=sp.getSpans(0, end, URLSpan.class);    
+	            SpannableStringBuilder style=new SpannableStringBuilder(text);   
+	            style.clearSpans();//should clear old spans   
+	            for(URLSpan url : urls){   
+	            	OpenClickableSpan openClickableSpan = new OpenClickableSpan(mContext,url.getURL());   
+	                style.setSpan(openClickableSpan,sp.getSpanStart(url),sp.getSpanEnd(url),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   
+	            }   
+	            viewHolder.text_camLiDes.setText(style);   
+	        }
+			
 			if (bean.getSrc() != null && bean.getSrc().length() > 0) {
 				DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.common_z).showImageForEmptyUri(R.drawable.common_z).showImageOnFail(R.drawable.common_z)
 						.cacheInMemory().cacheOnDisc().build();
