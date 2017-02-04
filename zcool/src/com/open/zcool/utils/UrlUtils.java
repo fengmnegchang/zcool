@@ -25,8 +25,10 @@ public class UrlUtils {
 	public static final String enrzAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
 	public static final String COOKIE = "__cfduid=df0a47eed3d6f56b0ce2b54928ced11051483189834; CNZZDATA1000003418=380336421-1483185838-%7C1483852222";
 	
-	 
+	/** pc 站酷首页**/
 	public static final String ZCOOL = "http://www.zcool.com.cn/";
+	/** pc 站酷Job**/
+	public static final String ZCOOL_JOB = "http://www.zcool.com.cn/job/";
 	
 	public static String getCookie(){
 		return COOKIE;
