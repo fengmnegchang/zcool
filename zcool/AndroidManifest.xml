@@ -53,6 +53,13 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/designer_list_f_desp" >
         </activity>
+        <!-- Indicator设计师 -->
+        <activity
+            android:name="com.open.zcool.activity.DesignerIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/designer_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

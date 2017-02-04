@@ -16,11 +16,11 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.open.zcool.R;
-import com.open.zcool.fragment.DesignerListFragment;
+import com.open.zcool.fragment.DesignerIndicatorFragment;
 
 /**
  *****************************************************************************************************************************************************************************
- * 推荐/活跃 设计师 
+ * Indicator设计师 
  * @author :fengguangjing
  * @createTime:2017-2-4上午10:32:14
  * @version:4.2.4
@@ -29,7 +29,7 @@ import com.open.zcool.fragment.DesignerListFragment;
  * @description:
  *****************************************************************************************************************************************************************************
  */
-public class DesignerListFragmentActivity  extends ZcoolCommonFragmentActivity{
+public class DesignerIndicatorFragmentActivity  extends ZcoolCommonFragmentActivity{
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,14 +38,14 @@ public class DesignerListFragmentActivity  extends ZcoolCommonFragmentActivity{
 	@Override
 	public void addfragment() {
 		// TODO Auto-generated method stub
-		Fragment fragment = DesignerListFragment.newInstance(url, true,0);
+		Fragment fragment = DesignerIndicatorFragment.newInstance(url, true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.id_common_fragment, fragment).commit();
 	}
 
-	public static void startDesignerListFragmentActivity(Context context, String url) {
+	public static void startDesignerIndicatorFragmentActivity(Context context, String url) {
 		Intent intent = new Intent();
 		intent.putExtra("URL", url);
-		intent.setClass(context, DesignerListFragmentActivity.class);
+		intent.setClass(context, DesignerIndicatorFragmentActivity.class);
 		context.startActivity(intent);
 	}
 }

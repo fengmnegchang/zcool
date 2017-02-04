@@ -13,12 +13,13 @@ import android.util.Log;
 
 import com.open.android.jsoup.CommonService;
 import com.open.zcool.bean.DesignerBean;
+import com.open.zcool.bean.DesignerTabBean;
 import com.open.zcool.utils.UrlUtils;
 
 public class DesignerService extends CommonService {
 	public static final String TAG = DesignerService.class.getSimpleName();
 
-	public static List<DesignerBean> parseDesigner(String href) {
+	public static List<DesignerBean> parseDesigner(String href,int position) {
 		List<DesignerBean> list = new ArrayList<DesignerBean>();
 		try {
 			href = makeURL(href, new HashMap<String, Object>() {
@@ -30,7 +31,7 @@ public class DesignerService extends CommonService {
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
-				Element globalnavElement = doc.select("ul.designerList").first();
+				Element globalnavElement = doc.select("ul.designerList").get(position);
 				Elements moduleElements = globalnavElement.select("li");
 				if (moduleElements != null && moduleElements.size() > 0) {
 					for (int i = 0; i < moduleElements.size(); i++) {
@@ -80,6 +81,60 @@ public class DesignerService extends CommonService {
 								e.printStackTrace();
 							}
 
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						list.add(sbean);
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<DesignerTabBean> parseDesignerTab(String href) {
+		List<DesignerTabBean> list = new ArrayList<DesignerTabBean>();
+		try {
+			href = makeURL(href, new HashMap<String, Object>() {
+				{
+				}
+			});
+			Log.i(TAG, "url = " + href);
+
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element globalnavElement = doc.select("div.Ztab-index-designer").first();
+				Elements moduleElements = globalnavElement.select("span");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						DesignerTabBean sbean = new DesignerTabBean();
+						try {
+							/**
+							 * <div style="position:relative;">
+							 * <div class="Ztab-index-designer">
+							 *  <span class="current">推荐设计师</span>
+							 *  <span style="margin-left:25px">活跃设计师</span>
+							 *  </div></div>
+							 */
+							try {
+								Element aElement = moduleElements.get(i).select("span").first();
+								if (aElement != null) {
+									String title = aElement.text();
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									sbean.setHref(href);
+									sbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

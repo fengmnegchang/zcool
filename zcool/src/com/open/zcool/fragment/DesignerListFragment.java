@@ -47,11 +47,12 @@ public class DesignerListFragment extends BaseV4Fragment<DesignerJson, DesignerL
 	public DesignerAdapter mDesignerAdapter;
 	public PullToRefreshListView mPullToRefreshListView;
 
-	public static DesignerListFragment newInstance(String url, boolean isVisibleToUser) {
+	public static DesignerListFragment newInstance(String url, boolean isVisibleToUser,int position) {
 		DesignerListFragment fragment = new DesignerListFragment();
 		fragment.setFragment(fragment);
 		fragment.setUserVisibleHint(isVisibleToUser);
 		fragment.url = url;
+		fragment.position = position;
 		return fragment;
 	}
 
@@ -86,7 +87,7 @@ public class DesignerListFragment extends BaseV4Fragment<DesignerJson, DesignerL
 	public DesignerJson call() throws Exception {
 		// TODO Auto-generated method stub
 		DesignerJson mDesignerJson = new DesignerJson();
-		mDesignerJson.setList(DesignerService.parseDesigner(url));
+		mDesignerJson.setList(DesignerService.parseDesigner(url,position));
 		return mDesignerJson;
 	}
 
