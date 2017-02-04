@@ -106,6 +106,18 @@ public class RecommendJobService extends CommonService {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
+							
+							try {
+								Element picElement = moduleElements.get(i).select("div.pic-box").first();
+								if (picElement != null) {
+									String pic_box_href = picElement.select("a").first().attr("href");
+									Log.i(TAG, "i==" + i + ";pic_box_href==" + pic_box_href);
+									sbean.setPic_box_href(pic_box_href);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
 							try {
 								Element picElement = moduleElements.get(i).select("div.pic-box").first();
 								if (picElement != null) {

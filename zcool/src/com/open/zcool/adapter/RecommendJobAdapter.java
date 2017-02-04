@@ -78,6 +78,18 @@ public class RecommendJobAdapter extends CommonAdapter<RecommendJobBean> {
 					ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getHref());
 				}
 			});
+			viewHolder.text_pic_box.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getPic_box_href());
+				}
+			});
+			viewHolder.imageview.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getPic_box_href());
+				}
+			});
 
 		}
 		return convertView;

@@ -58,6 +58,8 @@ public class RecommendJobBean extends CommonBean {
 	private String href;
 	private String slogn;
 	private String tags;
+	private String pic_box_href;
+	
 	public String getJob_body_left() {
 		return job_body_left;
 	}
@@ -93,6 +95,12 @@ public class RecommendJobBean extends CommonBean {
 	}
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+	public String getPic_box_href() {
+		return pic_box_href;
+	}
+	public void setPic_box_href(String pic_box_href) {
+		this.pic_box_href = pic_box_href;
 	}
 	
 	
