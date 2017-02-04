@@ -60,6 +60,13 @@
             android:description="@string/designer_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity>
+         <!-- 推荐职位  找设计师，用站酷 -->
+        <activity
+            android:name="com.open.zcool.activity.RecommendJobListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/recommend_job_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
