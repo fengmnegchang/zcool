@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:paddingTop="10dp"
         android:layout_toLeftOf="@+id/imageview"
+        android:paddingTop="10dp"
         android:text="高级视觉设计师 1天前发布
 12k-15k 经验1-3年 / 学历不限 "
         android:textSize="14sp" />
@@ -26,6 +26,7 @@
         android:layout_height="50dp"
         android:layout_toLeftOf="@+id/text_pic_box"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/common_z" />
 
@@ -35,34 +36,49 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
-        android:paddingTop="10dp"
         android:gravity="left"
+        android:paddingTop="10dp"
         android:text="MoreFun莫凡
 电子商务/不需要融资"
         android:textSize="14sp" />
-    
-    <TextView
-        android:id="@+id/text_slogn"
+
+    <RelativeLayout
+        android:id="@+id/layout_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:layout_below="@+id/imageview"
-        android:text="一起牵手莫凡去挑战发现自己的未来吧！"
-        android:layout_marginTop="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:layout_below="@+id/text_job_body_left"
         android:background="#f4f4f4"
-        android:textSize="12sp" />
-<TextView
-        android:id="@+id/text_tags"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageview"
-        android:text="五险一金 年13薪 年度旅游"
-        android:layout_marginTop="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:textSize="14sp" />
+        android:layout_marginTop="5dp"
+         >
+
+        <TextView
+            android:id="@+id/text_slogn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/text_div"
+            android:gravity="left"
+            android:layout_centerVertical="true"
+            android:text="一起牵手莫凡去挑战发现自己的未来吧！"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/text_div"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/text_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/text_div"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:gravity="left"
+            android:text="五险一金 年13薪 年度旅游"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
 </RelativeLayout>
