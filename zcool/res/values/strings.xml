@@ -6,4 +6,5 @@
     <string name="zcool_webview_desp">webview</string>
 	<string name="index_focus_f_desp">站酷精选图片viewpager</string>
 	<string name="index_main_list_f_desp">列表main list</string>
+	<string name="designer_list_f_desp">推荐/活跃 设计师</string>
 </resources>

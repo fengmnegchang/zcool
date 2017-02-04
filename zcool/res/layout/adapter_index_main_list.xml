@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
     android:paddingTop="5dp" >
 
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginRight="5dp"
         android:gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/common_z" />
@@ -23,16 +22,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageview"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="logo collection"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/text_camLiDes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_title"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:text="原创作品 - 平面 - VI/CI 
 4小时前上传
 2559 人气 / 14 评论 / 102 推荐"
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_camLiDes"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:paddingTop="15dp"
         android:layout_toLeftOf="@+id/imageview2"
         android:text="seevisual "
         android:textSize="14sp" />

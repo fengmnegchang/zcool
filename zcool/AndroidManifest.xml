@@ -47,6 +47,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/index_main_list_f_desp" >
         </activity>
+        <!-- 推荐/活跃 设计师 -->
+        <activity
+            android:name="com.open.zcool.activity.DesignerListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/designer_list_f_desp" >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
