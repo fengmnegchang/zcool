@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffba00"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:padding="5dp" >
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btn_search"
+            android:background="@drawable/edittext_shape"
+            android:hint="搜索职位或公司"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/edit_search"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:background="#ffba00"
+            android:padding="10dp"
+            android:text="搜索"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_search"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="热门搜索：" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayouth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_hot"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+
+        <TextView
+            android:id="@+id/txt_designer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayouth"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="设计方向：" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayoutd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_designer"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+
+        <TextView
+            android:id="@+id/txt_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayoutd"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="管理职位：" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayoutm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_manager"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

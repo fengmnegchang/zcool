@@ -30,6 +30,8 @@ public class UrlUtils {
 	/** pc 站酷Job**/
 	public static final String ZCOOL_JOB = "http://www.zcool.com.cn/job/";
 	
+	public static final String ZCOOL_SEARCH_POST = "http://www.zcool.com.cn/job/searchpost.do?from=searchposttype&keys=%E8%A7%86%E8%A7%89";
+	
 	public static String getCookie(){
 		return COOKIE;
 	}

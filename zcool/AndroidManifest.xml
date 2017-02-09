@@ -75,6 +75,13 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+        <!--热门搜索-->
+        <activity
+            android:name="com.open.zcool.activity.SearchHotFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/search_hot_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
