@@ -82,6 +82,13 @@
             android:description="@string/search_hot_f_desp"
             >
         </activity>
+        <!--搜索keys结果-->
+        <activity
+            android:name="com.open.zcool.activity.SearchPostFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/search_post_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
