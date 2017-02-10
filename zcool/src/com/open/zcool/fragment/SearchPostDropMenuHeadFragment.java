@@ -16,6 +16,7 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,9 @@ import com.jayfang.dropdownmenu.DropItemBean;
 import com.jayfang.dropdownmenu.MenuBean;
 import com.jayfang.dropdownmenu.OnMenuSelectedListener;
 import com.open.android.fragment.BaseV4Fragment;
-import com.open.android.json.CommonJson;
 import com.open.zcool.R;
+import com.open.zcool.json.SearchPostJson;
+import com.open.zcool.jsoup.SearchPostService;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -40,7 +42,7 @@ import com.open.zcool.R;
  * @description:
  ***************************************************************************************************************************************************************************** 
  */
-public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<CommonJson, SearchPostDropMenuHeadFragment> {
+public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJson, SearchPostDropMenuHeadFragment> {
 	public DropDownMenu mDropDownMenu;
 	public List<DropItemBean> items = new ArrayList<DropItemBean>();
 	 
@@ -66,48 +68,30 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<CommonJson, S
 	public void initValues() {
 		// TODO Auto-generated method stub
 		super.initValues();
-		List<MenuBean> menulist = new ArrayList<MenuBean>();
-		MenuBean mbean = new MenuBean();
 		
-		DropItemBean d1 = new DropItemBean();
-		d1.setLabel("按月薪");
-		
-		menulist = new ArrayList<MenuBean>();
-		mbean = new MenuBean();
-		mbean.setMenuname("按月薪");
-		menulist.add(mbean);
-		
-		mbean = new MenuBean();
-		mbean.setMenuname("内地");
-		menulist.add(mbean);
-		
-		mbean = new MenuBean();
-		mbean.setMenuname("香港");
-		menulist.add(mbean);
-		
-		d1.setMenulist(menulist);
-		items.add(d1);
-		
-		d1 = new DropItemBean();
-		d1.setLabel("按职业性质");
-		menulist = new ArrayList<MenuBean>();
-		mbean = new MenuBean();
-		mbean.setMenuname("按职业性质");
-		menulist.add(mbean);
-		
-		mbean = new MenuBean();
-		mbean.setMenuname("2016");
-		menulist.add(mbean);
-		
-		mbean = new MenuBean();
-		mbean.setMenuname("2015");
-		menulist.add(mbean);
-		
-		d1.setMenulist(menulist);
-		items.add(d1);
-		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.BaseV4Fragment#call()
+	 */
+	@Override
+	public SearchPostJson call() throws Exception {
+		// TODO Auto-generated method stub
+		SearchPostJson mSearchPostJson = new SearchPostJson();
+		mSearchPostJson.setItems(SearchPostService.parseSearchPost(url));
+		return mSearchPostJson;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.BaseV4Fragment#onCallback(java.lang.Object)
+	 */
+	@Override
+	public void onCallback(SearchPostJson result) {
+		// TODO Auto-generated method stub
+		items.clear();
+		items.addAll(result.getItems());
 		mDropDownMenu.setmMenuCount(items.size());
-		mDropDownMenu.setmShowCount(3);
+		mDropDownMenu.setmShowCount(6);
 		mDropDownMenu.setShowCheck(true);
 		mDropDownMenu.setmMenuTitleTextSize(16);
 		mDropDownMenu.setmMenuTitleTextColor(Color.parseColor("#777777"));
@@ -148,4 +132,23 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<CommonJson, S
          mDropDownMenu.setmMenuItems(items);
          mDropDownMenu.setIsDebug(false);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.open.tencenttv.BaseV4Fragment#handlerMessage(android.os.Message)
+	 */
+	@Override
+	public void handlerMessage(Message msg) {
+		// TODO Auto-generated method stub
+		super.handlerMessage(msg);
+		switch (msg.what) {
+		case MESSAGE_HANDLER:
+			doAsync(this, this, this);
+			break;
+		default:
+			break;
+		}
+	}
+	
 }
