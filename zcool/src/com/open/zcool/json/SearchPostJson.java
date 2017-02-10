@@ -30,13 +30,22 @@ import com.open.android.json.CommonJson;
  */
 public class SearchPostJson extends CommonJson {
 	public List<DropItemBean> items = new ArrayList<DropItemBean>();
-
+	public List<DropItemBean> moreitems = new ArrayList<DropItemBean>();
+	
 	public List<DropItemBean> getItems() {
 		return items;
 	}
 
 	public void setItems(List<DropItemBean> items) {
 		this.items = items;
+	}
+
+	public List<DropItemBean> getMoreitems() {
+		return moreitems;
+	}
+
+	public void setMoreitems(List<DropItemBean> moreitems) {
+		this.moreitems = moreitems;
 	}
 	
 	

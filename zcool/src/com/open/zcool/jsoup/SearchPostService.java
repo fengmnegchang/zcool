@@ -1,7 +1,6 @@
 package com.open.zcool.jsoup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -19,6 +18,85 @@ import com.open.zcool.utils.UrlUtils;
 public class SearchPostService extends CommonService {
 	public static final String TAG = SearchPostService.class.getSimpleName();
 
+	public static List<DropItemBean> parseSearchPostMore(String href) {
+		List<DropItemBean> items = new ArrayList<DropItemBean>();
+		DropItemBean dropbean =  new DropItemBean();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element divElement = doc.select("div.select-category").get(0);
+				Elements moduleElements = divElement.select("div.item");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					List<MenuBean> leftmenulist = new ArrayList<MenuBean>();
+					MenuBean leftmenubean;
+					for (int i = 0; i < moduleElements.size(); i++) {
+						try {
+							try {
+								/**
+								 * <dl>
+							<dt class="dt">工作经验：</dt>
+							<dd class="dd"> <a href="javascript:expclick(0)" data-id="0">全部</a> 
+							<a href="javascript:expclick(2)" data-id="2">应届毕业生</a>
+							<a href="javascript:expclick(3)" data-id="3">1-3年</a>
+							<a href="javascript:expclick(4)" data-id="4">3-5年</a>
+							<a href="javascript:expclick(5)" data-id="5">5-10年</a>
+							<a href="javascript:expclick(7)" data-id="7">10年以上</a>
+							<a href="javascript:expclick(1)" data-id="1">不限</a>
+							</dd>
+						</dl>
+								 */
+								Element spanElement = moduleElements.get(i).select("dt.dt").first();
+								if (spanElement != null) {
+									String title = spanElement.text();
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									leftmenubean = new MenuBean();
+									leftmenubean.setMenuname(title);
+									
+									
+									List<MenuBean> rightmenulist = new ArrayList<MenuBean>();
+									MenuBean rightmenubean;
+									
+									rightmenubean= new MenuBean();
+									rightmenubean.setMenuname(title);
+									rightmenulist.add(rightmenubean);
+									
+									Element ulElement = moduleElements.get(i).select("dd.dd").first();
+									if(ulElement!=null){
+										Elements liElements = ulElement.select("a");
+										for(int j=0;j<liElements.size();j++){
+											rightmenubean = new MenuBean();
+											Element aElement = liElements.get(j).select("a").first();
+											String menuname = aElement.text();
+											Log.i(TAG, "i==" + i + ";j==" + j + ";menuname==" + menuname);
+											rightmenubean.setMenuname(menuname);
+											rightmenulist.add(rightmenubean);
+										}
+									}
+									leftmenubean.setRightlist(rightmenulist);
+									leftmenulist.add(leftmenubean);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					dropbean.setMenulist(leftmenulist);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		items.add(dropbean);
+		return items;
+	}
+	
 	public static List<DropItemBean> parseSearchPost(String href) {
 		List<DropItemBean> items = new ArrayList<DropItemBean>();
 		try {

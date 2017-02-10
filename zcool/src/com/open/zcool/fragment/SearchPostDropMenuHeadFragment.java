@@ -45,7 +45,8 @@ import com.open.zcool.jsoup.SearchPostService;
 public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJson, SearchPostDropMenuHeadFragment> {
 	public DropDownMenu mDropDownMenu;
 	public List<DropItemBean> items = new ArrayList<DropItemBean>();
-	 
+	public List<DropItemBean> moreitems = new ArrayList<DropItemBean>();
+
 	public static SearchPostDropMenuHeadFragment newInstance(String url, boolean isVisibleToUser) {
 		SearchPostDropMenuHeadFragment fragment = new SearchPostDropMenuHeadFragment();
 		fragment.setFragment(fragment);
@@ -53,25 +54,29 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 		fragment.url = url;
 		return fragment;
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_search_post_drop_menu_head, container, false);
 		mDropDownMenu = (DropDownMenu) view.findViewById(R.id.drop_menu);
 		return view;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.open.android.fragment.BaseV4Fragment#initValues()
 	 */
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
 		super.initValues();
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.open.android.fragment.BaseV4Fragment#call()
 	 */
 	@Override
@@ -79,17 +84,24 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 		// TODO Auto-generated method stub
 		SearchPostJson mSearchPostJson = new SearchPostJson();
 		mSearchPostJson.setItems(SearchPostService.parseSearchPost(url));
+		mSearchPostJson.setMoreitems(SearchPostService.parseSearchPostMore(url));
 		return mSearchPostJson;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.open.android.fragment.BaseV4Fragment#onCallback(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.open.android.fragment.BaseV4Fragment#onCallback(java.lang.Object)
 	 */
 	@Override
 	public void onCallback(SearchPostJson result) {
 		// TODO Auto-generated method stub
 		items.clear();
 		items.addAll(result.getItems());
+		moreitems.clear();
+		moreitems.addAll(result.getMoreitems());
+
 		mDropDownMenu.setmMenuCount(items.size());
 		mDropDownMenu.setmShowCount(6);
 		mDropDownMenu.setShowCheck(true);
@@ -106,7 +118,6 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 		mDropDownMenu.setmUpArrow(R.drawable.arrow_up);
 		mDropDownMenu.setmDownArrow(R.drawable.arrow_down);
 
-
 		mDropDownMenu.setShowDivider(false);
 		mDropDownMenu.setmMenuListBackColor(getResources().getColor(R.color.white));
 		mDropDownMenu.setmMenuListSelectorRes(R.color.white);
@@ -118,21 +129,24 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 					RowIndex = 1;
 				}
 				Log.i(TAG, "select " + ColumnIndex + " column and " + RowIndex + " row");
-//				// 过滤筛选
-//				MenuBean mMenuBean = mMenuItems.get(ColumnIndex).getMenulist().get(RowIndex);
-//				Log.i(TAG, mMenuBean.getHref() + ";" + mMenuBean.getMenuname());
-//				Message msg = weakReferenceHandler.obtainMessage();
-//				msg.what = 111;
-//				msg.obj = mMenuBean.getHref();
-//				Log.i(TAG, "send msg ==href==" + mMenuBean.getHref() + ";what==" + 111);
-//				weakReferenceHandler.sendMessage(msg);
+				// // 过滤筛选
+				// MenuBean mMenuBean =
+				// mMenuItems.get(ColumnIndex).getMenulist().get(RowIndex);
+				// Log.i(TAG, mMenuBean.getHref() + ";" +
+				// mMenuBean.getMenuname());
+				// Message msg = weakReferenceHandler.obtainMessage();
+				// msg.what = 111;
+				// msg.obj = mMenuBean.getHref();
+				// Log.i(TAG, "send msg ==href==" + mMenuBean.getHref() +
+				// ";what==" + 111);
+				// weakReferenceHandler.sendMessage(msg);
 			}
 		});
-		
-         mDropDownMenu.setmMenuItems(items);
-         mDropDownMenu.setIsDebug(false);
+		mDropDownMenu.setmMenuMoreItems(moreitems);
+		mDropDownMenu.setmMenuItems(items);
+		mDropDownMenu.setIsDebug(false);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -150,5 +164,5 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 			break;
 		}
 	}
-	
+
 }
