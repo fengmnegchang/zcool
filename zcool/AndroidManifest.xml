@@ -89,6 +89,13 @@
             android:description="@string/search_post_f_desp"
             >
         </activity>
+        <!--sort列表-->
+        <activity
+            android:name="com.open.zcool.activity.SortCityListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/sort_city_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
