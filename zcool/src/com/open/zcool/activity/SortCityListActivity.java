@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.List;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -64,12 +66,31 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 	 * 汉字转换成拼音的类
 	 */
 	private CharacterParser characterParser;
-	private List<SortModel> SourceDateList;
-
+	private List<SortModel> SourceDateList = new ArrayList<SortModel>();
+	private List<SortModel> SourceDateHeadList = new ArrayList<SortModel>();
 	/**
 	 * 根据拼音来排列ListView里面的数据类
 	 */
 	private PinyinComparator pinyinComparator;
+
+	private Handler mHandler = new Handler() {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.Handler#handleMessage(android.os.Message)
+		 */
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			// SourceDateList =
+			// filledData(getResources().getStringArray(R.array.date));
+			// 根据a-z进行排序源数据
+			
+			adapter.notifyDataSetChanged();
+		}
+
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,12 +133,26 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 			}
 		});
 
-		// SourceDateList =
-		// filledData(getResources().getStringArray(R.array.date));
-		SourceDateList = citydata();
-		// 根据a-z进行排序源数据
-		 Collections.sort(SourceDateList, pinyinComparator);
-		adapter = new SortCityAdapter(this, SourceDateList);
+		new Thread() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see java.lang.Thread#run()
+			 */
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				super.run();
+				citydata();
+				Collections.sort(SourceDateList, pinyinComparator);
+				SourceDateHeadList.addAll(SourceDateList);
+				mHandler.sendEmptyMessage(1000);
+			}
+
+		}.start();
+		
+		
+		adapter = new SortCityAdapter(this, SourceDateHeadList);
 		sortListView.setAdapter(adapter);
 
 		mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
@@ -142,8 +177,7 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 		});
 	}
 
-	private List<SortModel> citydata() {
-		List<SortModel> list = new ArrayList<SortModel>();
+	private void citydata() {
 		try {
 			InputStream inputStream = getAssets().open("city.txt");
 			InputStreamReader inputStreamReader = null;
@@ -172,22 +206,33 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 					// 正则表达式，判断首字母是否是英文字母
 					if (sortString.matches("[A-Z]")) {
 						sortModel.setSortLetters(sortString.toUpperCase());
-					} else {
-						sortModel.setSortLetters("#");
-					}
-					if ( name.equals("市辖区") || name.equals("城区") || name.equals("矿区")) {
+						if (name.equals("市辖区") || name.equals("城区") || name.equals("矿区")) {
 
-					}else{
-						if(code.endsWith("000")){
-							if(name.equals("北京市") || name.equals("天津市")|| name.equals("重庆市")
-									|| name.equals("深圳市")|| name.equals("台湾省")|| name.equals("香港特别行政区")|| name.equals("澳门特别行政区")){
-								list.add(sortModel);
+						} else {
+							if (code.endsWith("000")) {
+								if (name.equals("北京市") || name.equals("天津市") || name.equals("重庆市") || name.equals("深圳市") || name.equals("台湾省") || name.equals("香港特别行政区") || name.equals("澳门特别行政区")) {
+									SourceDateList.add(sortModel);
+								}
+							} else {
+								SourceDateList.add(sortModel);
 							}
-						}else{
-							list.add(sortModel);
 						}
+					} else {
+						if (name.startsWith("#c")) {
+							sortModel.setName(name.replace("#c", ""));
+							sortModel.setSortLetters("当前");
+						} else if (name.startsWith("#h")) {
+							sortModel.setName(name.replace("#h", ""));
+							sortModel.setSortLetters("历史");
+						} else if (name.startsWith("#r")) {
+							sortModel.setName(name.replace("#r", ""));
+							sortModel.setSortLetters("热门");
+						} else {
+							sortModel.setSortLetters("#");
+						}
+						SourceDateHeadList.add(sortModel);
 					}
-					
+
 					sb.append("\n");
 				}
 			} catch (IOException e) {
@@ -197,7 +242,6 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return list;
 	}
 
 	/**

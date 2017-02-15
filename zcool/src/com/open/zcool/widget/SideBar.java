@@ -39,7 +39,7 @@ public class SideBar extends View {
 	// 触摸事件
 	private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
 	// 26个字母
-	public static String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
+	public static String[] b = { "当前","历史","热门","A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
 			"W", "X", "Y", "Z", "#" };
 	private int choose = -1;// 选中
