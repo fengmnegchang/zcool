@@ -14,4 +14,5 @@
 	<string name="search_post_f_desp">搜索keys结果</string>
 	<string name="sort_city_desp">sort列表</string>
 	<string name="sort_city_indicator_f_desp">sort Indicator</string>
+	<string name="search_indicator_f_desp">搜索 Indicator</string>
 </resources>

@@ -104,6 +104,14 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+         <!-- 搜索 Indicator -->
+        <activity
+            android:name="com.open.zcool.activity.SearchPostIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/search_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
