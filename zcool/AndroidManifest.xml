@@ -96,6 +96,14 @@
             android:description="@string/sort_city_desp"
             >
         </activity>
+        <!-- sort Indicator -->
+        <activity
+            android:name="com.open.zcool.activity.SortCityIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/sort_city_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

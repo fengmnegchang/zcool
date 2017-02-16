@@ -2,14 +2,14 @@
  *****************************************************************************************************************************************************************************
  * 
  * @author :fengguangjing
- * @createTime:2017-2-10下午6:03:14
+ * @createTime:2017-2-16上午9:45:14
  * @version:4.2.4
  * @modifyTime:
  * @modifyAuthor:
  * @description:
  *****************************************************************************************************************************************************************************
  */
-package com.open.zcool.activity;
+package com.open.zcool.fragment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,19 +21,21 @@ import java.util.Collections;
 import java.util.List;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.open.android.activity.CommonFragmentActivity;
+import com.open.android.fragment.BaseV4Fragment;
 import com.open.android.json.CommonJson;
 import com.open.android.utils.CharacterParser;
 import com.open.zcool.R;
@@ -48,14 +50,14 @@ import com.open.zcool.widget.SideBar.OnTouchingLetterChangedListener;
  ***************************************************************************************************************************************************************************** 
  * 
  * @author :fengguangjing
- * @createTime:2017-2-10下午6:03:14
+ * @createTime:2017-2-16上午9:45:14
  * @version:4.2.4
  * @modifyTime:
  * @modifyAuthor:
  * @description:
  ***************************************************************************************************************************************************************************** 
  */
-public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
+public class SortCityFragment extends BaseV4Fragment<CommonJson, SortCityFragment> {
 	private ListView sortListView;
 	private SideBar sideBar;
 	private TextView dialog;
@@ -67,7 +69,6 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 	 */
 	private CharacterParser characterParser;
 	private List<SortModel> SourceDateHeadList = new ArrayList<SortModel>();
-	
 	private List<SortModel> TSourceDateList = new ArrayList<SortModel>();
 	private List<SortModel> TSourceDateHeadList = new ArrayList<SortModel>();
 	/**
@@ -75,93 +76,54 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 	 */
 	private PinyinComparator pinyinComparator;
 
-	private Handler mHandler = new Handler() {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.os.Handler#handleMessage(android.os.Message)
-		 */
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			super.handleMessage(msg);
-			// SourceDateList =
-			// filledData(getResources().getStringArray(R.array.date));
-			// 根据a-z进行排序源数据
+	public static SortCityFragment newInstance(String url, boolean isVisibleToUser) {
+		SortCityFragment fragment = new SortCityFragment();
+		fragment.setFragment(fragment);
+		fragment.setUserVisibleHint(isVisibleToUser);
+		fragment.url = url;
+		return fragment;
+	}
 
-			adapter.notifyDataSetChanged();
-		}
-
-	};
-
+	@Nullable
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sort_city_list);
-		init();
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_sort_city_list, container, false);
+		sideBar = (SideBar) view.findViewById(R.id.sidrbar);
+		dialog = (TextView) view.findViewById(R.id.dialog);
+		sortListView = (ListView) view.findViewById(R.id.country_lvcountry);
+		mClearEditText = (ClearEditText) view.findViewById(R.id.filter_edit);
+		return view;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.open.android.activity.CommonFragmentActivity#findView()
+	 * @see com.open.android.fragment.BaseV4Fragment#initValues()
 	 */
 	@Override
-	protected void findView() {
+	public void initValues() {
 		// TODO Auto-generated method stub
-		super.findView();
-		sideBar = (SideBar) findViewById(R.id.sidrbar);
-		dialog = (TextView) findViewById(R.id.dialog);
-		sortListView = (ListView) findViewById(R.id.country_lvcountry);
-		mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.open.android.activity.CommonFragmentActivity#initValue()
-	 */
-	@Override
-	protected void initValue() {
-		// TODO Auto-generated method stub
-		super.initValue();
+		super.initValues();
 		// 实例化汉字转拼音类
 		characterParser = CharacterParser.getInstance();
 		pinyinComparator = new PinyinComparator();
 		sideBar.setTextView(dialog);
-		adapter = new SortCityAdapter(this, SourceDateHeadList);
+		
+		adapter = new SortCityAdapter(getActivity(), SourceDateHeadList);
 		sortListView.setAdapter(adapter);
-
-		new Thread() {
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.lang.Thread#run()
-			 */
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				super.run();
-				citydata();
-				Collections.sort(TSourceDateList, pinyinComparator);
-				TSourceDateHeadList.addAll(TSourceDateList);
-				
-				SourceDateHeadList.clear();
-				SourceDateHeadList.addAll(TSourceDateHeadList);
-				mHandler.sendEmptyMessage(1000);
-			}
-
-		}.start();
+		
+		
+		
+		
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.open.android.activity.CommonFragmentActivity#bindEvent()
+	 * @see com.open.android.fragment.BaseV4Fragment#bindEvent()
 	 */
 	@Override
-	protected void bindEvent() {
+	public void bindEvent() {
 		// TODO Auto-generated method stub
 		super.bindEvent();
 		// 设置右侧触摸监听
@@ -177,14 +139,16 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 
 			}
 		});
+
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				Toast.makeText(getApplication(), ((SortModel) adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), ((SortModel) adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
 			}
 		});
+
 		// 根据输入框输入值的改变来过滤搜索
 		mClearEditText.addTextChangedListener(new TextWatcher() {
 
@@ -205,9 +169,49 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 		});
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.open.enrz.fragment.BaseV4Fragment#handlerMessage(android.os.Message)
+	 */
+	@Override
+	public void handlerMessage(Message msg) {
+		// TODO Auto-generated method stub
+		switch (msg.what) {
+		case 1005:
+			adapter.notifyDataSetChanged();
+			break;
+		case MESSAGE_HANDLER:
+			new Thread() {
+				/*
+				 * (non-Javadoc)
+				 * 
+				 * @see java.lang.Thread#run()
+				 */
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					super.run();
+					citydata();
+					Collections.sort(TSourceDateList, pinyinComparator);
+					TSourceDateHeadList.addAll(TSourceDateList);
+					
+					SourceDateHeadList.clear();
+					SourceDateHeadList.addAll(TSourceDateHeadList);
+					weakReferenceHandler.sendEmptyMessage(1005);
+				}
+
+			}.start();
+			break;
+		default:
+			break;
+		}
+	}
+
 	private void citydata() {
 		try {
-			InputStream inputStream = getAssets().open("city.txt");
+			InputStream inputStream = getActivity().getAssets().open("city.txt");
 			InputStreamReader inputStreamReader = null;
 			try {
 				inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
@@ -217,6 +221,7 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 			BufferedReader reader = new BufferedReader(inputStreamReader);
 			StringBuffer sb = new StringBuffer("");
 			String line;
+			int i=0;
 			try {
 				while ((line = reader.readLine()) != null) {
 					SortModel sortModel = new SortModel();
@@ -229,6 +234,7 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 
 					// 汉字转换成拼音
 					String pinyin = characterParser.getSelling(name);
+					System.out.println("i=="+i+";"+pinyin);
 					String sortString = pinyin.substring(0, 1).toUpperCase();
 
 					// 正则表达式，判断首字母是否是英文字母
@@ -262,43 +268,15 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 					}
 
 					sb.append("\n");
+					i++;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(sb.toString());
+//			System.out.println(sb.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * 为ListView填充数据
-	 * 
-	 * @param date
-	 * @return
-	 */
-	private List<SortModel> filledData(String[] date) {
-		List<SortModel> mSortList = new ArrayList<SortModel>();
-
-		for (int i = 0; i < date.length; i++) {
-			SortModel sortModel = new SortModel();
-			sortModel.setName(date[i]);
-			// 汉字转换成拼音
-			String pinyin = characterParser.getSelling(date[i]);
-			String sortString = pinyin.substring(0, 1).toUpperCase();
-
-			// 正则表达式，判断首字母是否是英文字母
-			if (sortString.matches("[A-Z]")) {
-				sortModel.setSortLetters(sortString.toUpperCase());
-			} else {
-				sortModel.setSortLetters("#");
-			}
-
-			mSortList.add(sortModel);
-		}
-		return mSortList;
-
 	}
 
 	/**
@@ -325,5 +303,4 @@ public class SortCityListActivity extends CommonFragmentActivity<CommonJson> {
 		Collections.sort(filterDateList, pinyinComparator);
 		adapter.updateListView(filterDateList);
 	}
-
 }
