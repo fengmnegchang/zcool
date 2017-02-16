@@ -195,10 +195,10 @@ public class SortCityFragment extends BaseV4Fragment<CommonJson, SortCityFragmen
 					super.run();
 					citydata();
 					Collections.sort(TSourceDateList, pinyinComparator);
-					TSourceDateHeadList.addAll(TSourceDateList);
 					
 					SourceDateHeadList.clear();
 					SourceDateHeadList.addAll(TSourceDateHeadList);
+					SourceDateHeadList.addAll(TSourceDateList);
 					weakReferenceHandler.sendEmptyMessage(1005);
 				}
 
@@ -286,12 +286,16 @@ public class SortCityFragment extends BaseV4Fragment<CommonJson, SortCityFragmen
 	 */
 	private void filterData(String filterStr) {
 		List<SortModel> filterDateList = new ArrayList<SortModel>();
-
+		List<SortModel> filterDateList2 = new ArrayList<SortModel>();
+		filterDateList2.clear();
+		filterDateList2.addAll(TSourceDateHeadList);
+		
 		if (TextUtils.isEmpty(filterStr)) {
-			filterDateList = SourceDateHeadList;
+			filterDateList.clear();
+			filterDateList.addAll(TSourceDateList);
 		} else {
 			filterDateList.clear();
-			for (SortModel sortModel : SourceDateHeadList) {
+			for (SortModel sortModel : TSourceDateList) {
 				String name = sortModel.getName();
 				if (name.indexOf(filterStr.toString()) != -1 || characterParser.getSelling(name).startsWith(filterStr.toString())) {
 					filterDateList.add(sortModel);
@@ -301,6 +305,7 @@ public class SortCityFragment extends BaseV4Fragment<CommonJson, SortCityFragmen
 
 		// 根据a-z进行排序
 		Collections.sort(filterDateList, pinyinComparator);
-		adapter.updateListView(filterDateList);
+		filterDateList2.addAll(filterDateList);
+		adapter.updateListView(filterDateList2);
 	}
 }
