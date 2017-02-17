@@ -131,7 +131,7 @@ public class SearchPostService extends CommonService {
 									dropbean = new DropItemBean();
 									String title = spanElement.text();
 									Log.i(TAG, "i==" + i + ";title==" + title);
-									dropbean.setLabel(title);
+									dropbean.setLabel(title.replace(" ", ""));
 									
 									List<MenuBean> menulist = new ArrayList<MenuBean>();
 									MenuBean menubean;
@@ -146,11 +146,20 @@ public class SearchPostService extends CommonService {
 											menubean = new MenuBean();
 											Element aElement = liElements.get(j).select("a").first();
 											String menuname = aElement.text();
-											Log.i(TAG, "i==" + i + ";j==" + j + ";menuname==" + menuname);
+											String menuhref = aElement.attr("href");
+											Log.i(TAG, "i==" + i + ";j==" + j + ";menuname==" + menuname+";menuhref = "+menuhref);
 											menubean.setMenuname(menuname);
+											menubean.setHref(menuhref);
 											menulist.add(menubean);
+											if(dropbean.getLabel().equals(menuname.replace(" ", ""))){
+												dropbean.setTypehref(menuhref);
+											}
 										}
 									}
+									if(dropbean.getTypehref()==null){
+										dropbean.setTypehref(menulist.get(1).getHref());
+									}
+									menulist.get(0).setHref(menulist.get(1).getHref());
 									dropbean.setMenulist(menulist);
 									items.add(dropbean);
 								}

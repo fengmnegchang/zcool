@@ -27,6 +27,7 @@ import com.jayfang.dropdownmenu.DropItemBean;
 import com.jayfang.dropdownmenu.MenuBean;
 import com.jayfang.dropdownmenu.OnMenuSelectedListener;
 import com.open.android.fragment.BaseV4Fragment;
+import com.open.android.weak.WeakReferenceHandler;
 import com.open.zcool.R;
 import com.open.zcool.json.SearchPostJson;
 import com.open.zcool.jsoup.SearchPostService;
@@ -46,12 +47,14 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 	public DropDownMenu mDropDownMenu;
 	public List<DropItemBean> items = new ArrayList<DropItemBean>();
 	public List<DropItemBean> moreitems = new ArrayList<DropItemBean>();
+	public WeakReferenceHandler sweakReferenceHandler;
 
-	public static SearchPostDropMenuHeadFragment newInstance(String url, boolean isVisibleToUser) {
+	public static SearchPostDropMenuHeadFragment newInstance(WeakReferenceHandler sweakReferenceHandler, String url, boolean isVisibleToUser) {
 		SearchPostDropMenuHeadFragment fragment = new SearchPostDropMenuHeadFragment();
 		fragment.setFragment(fragment);
 		fragment.setUserVisibleHint(isVisibleToUser);
 		fragment.url = url;
+		fragment.sweakReferenceHandler = sweakReferenceHandler;
 		return fragment;
 	}
 
@@ -124,22 +127,32 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 		mDropDownMenu.setmArrowMarginTitle(20);
 		mDropDownMenu.setMenuSelectedListener(new OnMenuSelectedListener() {
 			@Override
-			public void onSelected(View listview, int RowIndex, int ColumnIndex) {
+			public void onSelected(View listview, int item, int RowIndex, int ColumnIndex) {
 				if (RowIndex == 0) {
 					RowIndex = 1;
 				}
 				Log.i(TAG, "select " + ColumnIndex + " column and " + RowIndex + " row");
+				
+				MenuBean mMenuBean = null;
+				String typehref=null;
+				if (item == 0) {
+					typehref = items.get(ColumnIndex).getTypehref();
+					mMenuBean = items.get(ColumnIndex).getMenulist().get(RowIndex);
+					items.get(ColumnIndex).setTypehref(mMenuBean.getHref());
+				} else if (item == 1) {
+					typehref = moreitems.get(ColumnIndex).getTypehref();
+					mMenuBean = moreitems.get(ColumnIndex).getMenulist().get(RowIndex);
+					moreitems.get(ColumnIndex).setTypehref(mMenuBean.getHref());
+				}
 				// // 过滤筛选
-				// MenuBean mMenuBean =
-				// mMenuItems.get(ColumnIndex).getMenulist().get(RowIndex);
-				// Log.i(TAG, mMenuBean.getHref() + ";" +
-				// mMenuBean.getMenuname());
-				// Message msg = weakReferenceHandler.obtainMessage();
-				// msg.what = 111;
-				// msg.obj = mMenuBean.getHref();
-				// Log.i(TAG, "send msg ==href==" + mMenuBean.getHref() +
-				// ";what==" + 111);
-				// weakReferenceHandler.sendMessage(msg);
+				
+				mMenuBean.setTypehref(typehref);
+				Log.i(TAG,  mMenuBean.getMenuname()+mMenuBean.getHref());
+				Message msg = sweakReferenceHandler.obtainMessage();
+				msg.what = MESSAGE_DROP_MENU_ITEM_SELECTED;
+				msg.obj = mMenuBean;
+				Log.i(TAG, "send msg == " + mMenuBean.getMenuname()+mMenuBean.getHref() + ";what==" + MESSAGE_DROP_MENU_ITEM_SELECTED);
+				sweakReferenceHandler.sendMessage(msg);
 			}
 		});
 		mDropDownMenu.setmMenuMoreItems(moreitems);
