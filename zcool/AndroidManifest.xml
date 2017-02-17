@@ -112,6 +112,13 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+         <!--企业头部 优质企业推荐-->
+        <activity
+            android:name="com.open.zcool.activity.EnterpriseHeadViewPagerFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/enterprise_head_viewpager_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
