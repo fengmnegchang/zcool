@@ -140,12 +140,11 @@ public class SearchPostDropMenuHeadFragment extends BaseV4Fragment<SearchPostJso
 					mMenuBean = items.get(ColumnIndex).getMenulist().get(RowIndex);
 					items.get(ColumnIndex).setTypehref(mMenuBean.getHref());
 				} else if (item == 1) {
-					typehref = moreitems.get(ColumnIndex).getTypehref();
-					mMenuBean = moreitems.get(ColumnIndex).getMenulist().get(RowIndex);
-					moreitems.get(ColumnIndex).setTypehref(mMenuBean.getHref());
+					typehref = moreitems.get(0).getMenulist().get(ColumnIndex).getTypehref();
+					mMenuBean = moreitems.get(0).getMenulist().get(ColumnIndex).getRightlist().get(RowIndex);
+					moreitems.get(0).getMenulist().get(ColumnIndex).setTypehref(mMenuBean.getHref());
 				}
 				// // 过滤筛选
-				
 				mMenuBean.setTypehref(typehref);
 				Log.i(TAG,  mMenuBean.getMenuname()+mMenuBean.getHref());
 				Message msg = sweakReferenceHandler.obtainMessage();

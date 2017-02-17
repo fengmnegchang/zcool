@@ -69,11 +69,24 @@ public class SearchPostService extends CommonService {
 											rightmenubean = new MenuBean();
 											Element aElement = liElements.get(j).select("a").first();
 											String menuname = aElement.text();
+											String menuhref = aElement.attr("href");
 											Log.i(TAG, "i==" + i + ";j==" + j + ";menuname==" + menuname);
 											rightmenubean.setMenuname(menuname);
+											if(menuhref.contains("javascript:cityclick(")){
+												menuhref = "data-id"+aElement.attr("data-id");
+											}
+											rightmenubean.setHref(menuhref);
 											rightmenulist.add(rightmenubean);
+											
+											if(leftmenubean.getMenuname().equals(menuname.replace(" ", ""))){
+												leftmenubean.setTypehref(menuhref);
+											}
 										}
 									}
+									if(leftmenubean.getTypehref()==null){
+										leftmenubean.setTypehref(rightmenulist.get(1).getHref());
+									}
+									rightmenulist.get(0).setHref(rightmenulist.get(1).getHref());
 									leftmenubean.setRightlist(rightmenulist);
 									leftmenulist.add(leftmenubean);
 								}

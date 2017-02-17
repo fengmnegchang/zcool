@@ -101,6 +101,32 @@ public class SearchPostFragment extends RecommendJobPullListFragment{
 				ckeyid = ckeys.replace("javascript:workstatusclick(", "").replace(")", "");
 				pkeyid = mMenuBean.getTypehref().replace("javascript:workstatusclick(", "").replace(")", "");
 				url  = url.replace("&search_workstatus="+pkeyid, "&search_workstatus="+ckeyid);
+			}else if(ckeys.contains("javascript:expclick(")){
+				//工作经验 search_experienceid
+				ckeyid = ckeys.replace("javascript:expclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:expclick(", "").replace(")", "");
+				url  = url.replace("&search_experienceid="+pkeyid, "&search_experienceid="+ckeyid);
+			}else if(ckeys.contains("javascript:dipclick(")){
+				//学历要求 search_diplomaid
+				ckeyid = ckeys.replace("javascript:dipclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:dipclick(", "").replace(")", "");
+				url  = url.replace("&search_diplomaid="+pkeyid, "&search_diplomaid="+ckeyid);
+			}else if(ckeys.contains("javascript:stageclick(")){
+				//融资阶段 search_diplomaid
+				ckeyid = ckeys.replace("javascript:stageclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:stageclick(", "").replace(")", "");
+				url  = url.replace("&search_stageid="+pkeyid, "&search_stageid="+ckeyid);
+			}else if(ckeys.contains("javascript:industryclick(")){
+				//所属行业 search_diplomaid
+				ckeyid = ckeys.replace("javascript:industryclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:industryclick(", "").replace(")", "");
+				url  = url.replace("&search_industryid="+pkeyid, "&search_industryid="+ckeyid);
+			}else if(ckeys.contains("data-id")){
+				//工作地点 search_cityid
+				//<a href="javascript:cityclick(0,47);"  class="city-one-text" data-id="47">北京</a>
+				ckeyid = ckeys.replace("data-id", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("data-id", "").replace(")", "");
+				url  = url.replace("&search_cityid="+pkeyid, "&search_cityid="+ckeyid);
 			}
 			Log.i(TAG, "pkeyid=="+pkeyid+";ckeyid=="+ckeyid);
 			weakReferenceHandler.sendEmptyMessage(MESSAGE_HANDLER);
