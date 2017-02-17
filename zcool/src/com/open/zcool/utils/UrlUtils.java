@@ -32,6 +32,11 @@ public class UrlUtils {
 	
 	public static final String ZCOOL_SEARCH_POST = "http://www.zcool.com.cn/job/searchpost.do?keys=%E8%A7%86%E8%A7%89&search_cityid=66&search_districtid=0&search_experienceid=0&search_diplomaid=-1&search_stageid=0&search_industryid=0&search_workstatus=0&search_salaryid=0&orderflag=undefined";
 	
+	public static final String ZCOOL_SEARCH_POST_QIYE = "http://www.zcool.com.cn/job/qiye";
+	
+	public static final String ZCOOL_SEARCH_POST_KEYS = "http://www.zcool.com.cn/job/searchpost.do?search_cityid=66&search_districtid=0&search_experienceid=0&search_diplomaid=-1&search_stageid=0&search_industryid=0&search_workstatus=0&search_salaryid=0&orderflag=undefined&keys=";
+	
+	
 	public static String getCookie(){
 		return COOKIE;
 	}

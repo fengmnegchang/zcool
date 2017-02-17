@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 
 import com.open.zcool.bean.DesignerTabBean;
 import com.open.zcool.json.DesignerTabJson;
+import com.open.zcool.utils.UrlUtils;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -46,10 +47,12 @@ public class SearchPostIndicatorFragment extends DesignerIndicatorFragment {
 		ArrayList<DesignerTabBean> tlist = new ArrayList<DesignerTabBean>();
 		DesignerTabBean tabBean = new DesignerTabBean();
 		tabBean.setTitle("首页");
+		tabBean.setHref(url);
 		tlist.add(tabBean);
 
 		tabBean = new DesignerTabBean();
 		tabBean.setTitle("企业");
+		tabBean.setHref(url);
 		tlist.add(tabBean);
 		
 		tabBean = new DesignerTabBean();
@@ -71,9 +74,9 @@ public class SearchPostIndicatorFragment extends DesignerIndicatorFragment {
 			DesignerTabBean bean = result.getList().get(i);
 			titleList.add(bean.getTitle());
 			if (i == 0) {
-				fragment = SearchPostFragment.newInstance(url, true);
+				fragment = SearchPostFragment.newInstance(bean.getHref(), true);
 			} else {
-				fragment = SearchPostFragment.newInstance(url, false);
+				fragment = SearchPostFragment.newInstance(bean.getHref(), false);
 			}
 			listRankFragment.add(fragment);
 		}

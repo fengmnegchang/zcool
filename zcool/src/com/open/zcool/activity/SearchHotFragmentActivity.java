@@ -11,6 +11,8 @@
  */
 package com.open.zcool.activity;
 
+import java.net.URLEncoder;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -91,6 +93,7 @@ public class SearchHotFragmentActivity extends CommonFragmentActivity<SearchHotJ
 	protected void bindEvent() {
 		// TODO Auto-generated method stub
 		super.bindEvent();
+		btn_search.setOnClickListener(this);
 		tagcontainerLayouth.setOnTagClickListener(new OnTagClickListener() {
 			
 			@Override
@@ -108,7 +111,7 @@ public class SearchHotFragmentActivity extends CommonFragmentActivity<SearchHotJ
 			@Override
 			public void onTagClick(int position, String text) {
 				// TODO Auto-generated method stub
-				
+				startSearch(text);
 			}
 		});
 		tagcontainerLayoutd.setOnTagClickListener(new OnTagClickListener() {
@@ -128,7 +131,7 @@ public class SearchHotFragmentActivity extends CommonFragmentActivity<SearchHotJ
 			@Override
 			public void onTagClick(int position, String text) {
 				// TODO Auto-generated method stub
-				
+				startSearch(text);
 			}
 		});
 		tagcontainerLayoutm.setOnTagClickListener(new OnTagClickListener() {
@@ -148,7 +151,7 @@ public class SearchHotFragmentActivity extends CommonFragmentActivity<SearchHotJ
 			@Override
 			public void onTagClick(int position, String text) {
 				// TODO Auto-generated method stub
-				
+				startSearch(text);
 			}
 		});
 	}
@@ -160,6 +163,25 @@ public class SearchHotFragmentActivity extends CommonFragmentActivity<SearchHotJ
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		super.onClick(v);
+		switch (v.getId()) {
+		case R.id.btn_search:
+			//http://www.zcool.com.cn/job/searchpost.do?from=searchposttype&keys=%E8%A7%86%E8%A7%89
+			//http://www.zcool.com.cn/job/searchpost.do?keys=%E8%A7%86%E8%A7%89&search_cityid=66&search_districtid=0&search_experienceid=0&search_diplomaid=-1&search_stageid=0&search_industryid=0&search_workstatus=0&search_salaryid=0&orderflag=undefined
+			startSearch(edit_search.getText().toString());
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void startSearch(String keys){
+		try {
+			keys = URLEncoder.encode(keys, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String kurl = UrlUtils.ZCOOL_SEARCH_POST_KEYS+keys;
+		SearchPostFragmentActivity.startSearchPostFragmentActivity(this, kurl);
 	}
 
 	/* (non-Javadoc)
