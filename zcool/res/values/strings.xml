@@ -16,4 +16,5 @@
 	<string name="sort_city_indicator_f_desp">sort Indicator</string>
 	<string name="search_indicator_f_desp">搜索 Indicator</string>
 	<string name="enterprise_head_viewpager_f_desp">企业头部 优质企业推荐</string>
+	<string name="resident_enterprise_list_f_desp">常驻企业</string>
 </resources>

@@ -119,6 +119,13 @@
             android:description="@string/enterprise_head_viewpager_f_desp"
             >
         </activity>
+         <!--常驻企业-->
+        <activity
+            android:name="com.open.zcool.activity.ResidentEnterpriseListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/resident_enterprise_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
