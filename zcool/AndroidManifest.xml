@@ -133,6 +133,13 @@
             android:description="@string/enterprise_main_list_f_desp"
             >
         </activity>
+         <!--作品主列表-->
+        <activity
+            android:name="com.open.zcool.activity.WorksMainListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_wokrs_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

@@ -1,7 +1,6 @@
 package com.open.zcool.jsoup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -21,16 +20,19 @@ public class IndexMainListService extends CommonService {
 	public static List<IndexMainBean> parseIndexMain(String href, int pagerno) {
 		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
 		try {
-			if (pagerno > 1) {
-				//http://www.zcool.com.cn/index!3.html#mainList
-				href = href + "index!" + pagerno+".html#mainList";
-			}
-			href = makeURL(href, new HashMap<String, Object>() {
-				{
+			if(href.contains(UrlUtils.ZCOOL_WORKS)){
+				if (pagerno > 1) {
+					//http://www.zcool.com.cn/works/0!0!null!0!0!200!1!1!!!
+					//http://www.zcool.com.cn/works/0!0!null!0!0!200!1!2!!!
+					href = href + "0!0!null!0!0!200!1!" + pagerno+"!!!";
 				}
-			});
+			}else{
+				if (pagerno > 1) {
+					//http://www.zcool.com.cn/index!3.html#mainList
+					href = href + "index!" + pagerno+".html#mainList";
+				}
+			}
 			Log.i(TAG, "url = " + href);
-
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
 			// System.out.println(doc.toString());
 

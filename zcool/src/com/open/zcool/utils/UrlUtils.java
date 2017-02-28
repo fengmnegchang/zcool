@@ -38,6 +38,9 @@ public class UrlUtils {
 	/**常驻企业**/
 	public static final String ZCOOL_LIST_VIP_COMPANY = "http://www.zcool.com.cn/job/listVipCompany.do?position=companyindex&pageNo=1&pageSize=10";
 	
+	/** pc 作品**/
+	public static final String ZCOOL_WORKS = "http://www.zcool.com.cn/works/";
+	
 	public static String getCookie(){
 		return COOKIE;
 	}
