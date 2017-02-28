@@ -52,11 +52,12 @@ public class SearchPostIndicatorFragment extends DesignerIndicatorFragment {
 
 		tabBean = new DesignerTabBean();
 		tabBean.setTitle("企业");
-		tabBean.setHref(url);
+		tabBean.setHref(UrlUtils.ZCOOL_SEARCH_POST_QIYE);
 		tlist.add(tabBean);
 		
 		tabBean = new DesignerTabBean();
 		tabBean.setTitle("我发布的职位");
+		tabBean.setHref(url);
 		tlist.add(tabBean);
 		mDesignerTabJson.setList(tlist);
 		return mDesignerTabJson;
@@ -75,7 +76,9 @@ public class SearchPostIndicatorFragment extends DesignerIndicatorFragment {
 			titleList.add(bean.getTitle());
 			if (i == 0) {
 				fragment = SearchPostFragment.newInstance(bean.getHref(), true);
-			} else {
+			} else if(i==1){
+				fragment = EnterpriseMainListFragment.newInstance(bean.getHref(), false);
+			}else {
 				fragment = SearchPostFragment.newInstance(bean.getHref(), false);
 			}
 			listRankFragment.add(fragment);

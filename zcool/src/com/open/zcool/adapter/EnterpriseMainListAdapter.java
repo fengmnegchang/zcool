@@ -15,6 +15,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -27,6 +31,7 @@ import com.open.android.adapter.CommonAdapter;
 import com.open.zcool.R;
 import com.open.zcool.activity.ZcoolWebViewActivity;
 import com.open.zcool.bean.EnterpriseMainBean;
+import com.open.zcool.widget.OpenClickableSpan;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -67,8 +72,23 @@ public class EnterpriseMainListAdapter extends CommonAdapter<EnterpriseMainBean>
 				ImageLoader.getInstance().displayImage(bean.getSrc(), viewHolder.imageview, options, getImageLoadingListener());
 			}
 			viewHolder.text_tags.setText(Html.fromHtml(bean.getTags()));
-			viewHolder.text_mt.setText(Html.fromHtml(bean.getMt()));
+//			viewHolder.text_mt.setText(Html.fromHtml(bean.getMt()));
 			viewHolder.text_title.setText(Html.fromHtml(bean.getTitle()));
+			viewHolder.text_title.setMovementMethod(LinkMovementMethod.getInstance());   
+			CharSequence text = viewHolder.text_title.getText();   
+	        if(text instanceof Spannable){   
+	            int end = text.length();   
+	            Spannable sp = (Spannable)viewHolder.text_title.getText();   
+	            URLSpan[] urls=sp.getSpans(0, end, URLSpan.class);    
+	            SpannableStringBuilder style=new SpannableStringBuilder(text);   
+	            style.clearSpans();//should clear old spans   
+	            for(URLSpan url : urls){   
+	            	OpenClickableSpan openClickableSpan = new OpenClickableSpan(mContext,url.getURL());   
+	                style.setSpan(openClickableSpan,sp.getSpanStart(url),sp.getSpanEnd(url),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   
+	            }   
+	            viewHolder.text_title.setText(style);   
+	        }
+			
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
