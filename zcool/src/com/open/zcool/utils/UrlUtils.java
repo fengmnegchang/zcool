@@ -22,7 +22,7 @@ public class UrlUtils {
    /** 浏览器代理 **/
 	public static final String userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31";
 	public static final String tencentAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36 QQBrowser/4.1.4132.400";
-	public static final String enrzAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
+	public static final String enrzAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36 QQBrowser/4.1.4132.400";
 	public static final String COOKIE = "__cfduid=df0a47eed3d6f56b0ce2b54928ced11051483189834; CNZZDATA1000003418=380336421-1483185838-%7C1483852222";
 	
 	/** pc 站酷首页**/
@@ -37,9 +37,10 @@ public class UrlUtils {
 	public static final String ZCOOL_SEARCH_POST_KEYS = "http://www.zcool.com.cn/job/searchpost.do?search_cityid=66&search_districtid=0&search_experienceid=0&search_diplomaid=-1&search_stageid=0&search_industryid=0&search_workstatus=0&search_salaryid=0&orderflag=undefined&keys=";
 	/**常驻企业**/
 	public static final String ZCOOL_LIST_VIP_COMPANY = "http://www.zcool.com.cn/job/listVipCompany.do?position=companyindex&pageNo=1&pageSize=10";
-	
 	/** pc 作品**/
 	public static final String ZCOOL_WORKS = "http://www.zcool.com.cn/works/";
+	/**您也许会对以下作品感兴趣换一换***/
+	public static final String ZCOOL_GUESS = "http://www.zcool.com.cn/works/guess";
 	
 	public static String getCookie(){
 		return COOKIE;

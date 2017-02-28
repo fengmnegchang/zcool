@@ -19,4 +19,5 @@
 	<string name="resident_enterprise_list_f_desp">常驻企业</string>
 	<string name="enterprise_main_list_f_desp">企业主列表</string>
 	<string name="zcool_wokrs_list_f_desp">作品主列表</string>
+	<string name="zcool_wokrs_foot_expend_list_f_desp">作品底部推荐信息</string>
 </resources>
