@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/common_z" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/imageview"
+        android:gravity="left"
+        android:paddingTop="10dp"
+        android:paddingRight="80dp"
+        android:text="表情云 集结全国表情达人，共建表情云平台"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_mt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_title"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/imageview"
+        android:gravity="left"
+        android:paddingTop="10dp"
+        android:paddingRight="80dp"
+        android:text="上海市  互联网  1-50人  6职位正在招聘 "
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_href"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="企业主页"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp" 
+         android:background="#f4f4f4"
+        />
+
+    <RelativeLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_mt"
+        android:layout_marginTop="5dp"
+        android:background="#f4f4f4" >
+
+        <TextView
+            android:id="@+id/text_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:text="赴日培训  大大指导  项目奖金  半年涨薪  旅游福利  五险一金  节日福利  带薪年假"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
