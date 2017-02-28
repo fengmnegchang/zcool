@@ -20,4 +20,5 @@
 	<string name="enterprise_main_list_f_desp">企业主列表</string>
 	<string name="zcool_wokrs_list_f_desp">作品主列表</string>
 	<string name="zcool_wokrs_foot_expend_list_f_desp">作品底部推荐信息</string>
+	<string name="zcool_wokrs_search_head_drop_f_desp">作品头部搜索条件</string>
 </resources>

@@ -147,6 +147,13 @@
             android:description="@string/zcool_wokrs_foot_expend_list_f_desp"
             >
         </activity>
+        <!--作品头部搜索条件-->
+        <activity
+            android:name="com.open.zcool.activity.WorksSearchHeadDropFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_wokrs_search_head_drop_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
