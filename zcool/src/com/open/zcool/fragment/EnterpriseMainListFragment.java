@@ -28,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.jayfang.dropdownmenu.MenuBean;
 import com.open.android.fragment.BaseV4Fragment;
 import com.open.zcool.R;
 import com.open.zcool.adapter.EnterpriseMainListAdapter;
@@ -50,7 +51,8 @@ public class EnterpriseMainListFragment extends BaseV4Fragment<EnterpriseMainJso
 	private List<EnterpriseMainBean> list = new ArrayList<EnterpriseMainBean>();
 	private EnterpriseMainListAdapter mEnterpriseMainListAdapter;
 	public PullToRefreshListView mPullToRefreshListView;
-
+	public View headview;
+	
 	public static EnterpriseMainListFragment newInstance(String url, boolean isVisibleToUser) {
 		EnterpriseMainListFragment fragment = new EnterpriseMainListFragment();
 		fragment.setFragment(fragment);
@@ -64,6 +66,7 @@ public class EnterpriseMainListFragment extends BaseV4Fragment<EnterpriseMainJso
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_common_pulllistview, container, false);
 		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
+		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_search_post_head, null);
 		return view;
 	}
 
@@ -76,6 +79,10 @@ public class EnterpriseMainListFragment extends BaseV4Fragment<EnterpriseMainJso
 	public void initValues() {
 		// TODO Auto-generated method stub
 		super.initValues();
+		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
+		SearchEnterpriseMainMenuHeadFragment fragment = SearchEnterpriseMainMenuHeadFragment.newInstance(weakReferenceHandler,url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, fragment).commit();
+		
 		mEnterpriseMainListAdapter = new EnterpriseMainListAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mEnterpriseMainListAdapter);
 		mPullToRefreshListView.setMode(Mode.BOTH);
@@ -160,9 +167,36 @@ public class EnterpriseMainListFragment extends BaseV4Fragment<EnterpriseMainJso
 	@Override
 	public void handlerMessage(Message msg) {
 		// TODO Auto-generated method stub
+		super.handlerMessage(msg);
 		switch (msg.what) {
 		case MESSAGE_HANDLER:
 			doAsync(this, this, this);
+			break;
+		case MESSAGE_DROP_MENU_ITEM_SELECTED:
+			Log.i(TAG, "handler msg == name==" +msg.obj + ";what==" + MESSAGE_DROP_MENU_ITEM_SELECTED);
+			MenuBean mMenuBean = (MenuBean) msg.obj;
+			String ckeys = mMenuBean.getHref();
+			String ckeyid = "0";
+			String pkeyid = "0";
+			  if(ckeys.contains("javascript:stageclick(")){
+				//融资阶段 search_diplomaid
+				ckeyid = ckeys.replace("javascript:stageclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:stageclick(", "").replace(")", "");
+				url  = url.replace("&search_stageid="+pkeyid, "&search_stageid="+ckeyid);
+			}else if(ckeys.contains("javascript:industryclick(")){
+				//所属行业 search_diplomaid
+				ckeyid = ckeys.replace("javascript:industryclick(", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("javascript:industryclick(", "").replace(")", "");
+				url  = url.replace("&search_industryid="+pkeyid, "&search_industryid="+ckeyid);
+			}else if(ckeys.contains("data-id")){
+				//工作地点 search_cityid
+				//<a href="javascript:cityclick(0,47);"  class="city-one-text" data-id="47">北京</a>
+				ckeyid = ckeys.replace("data-id", "").replace(")", "");
+				pkeyid = mMenuBean.getTypehref().replace("data-id", "").replace(")", "");
+				url  = url.replace("&search_cityid="+pkeyid, "&search_cityid="+ckeyid);
+			}
+			Log.i(TAG, "pkeyid=="+pkeyid+";ckeyid=="+ckeyid);
+			weakReferenceHandler.sendEmptyMessage(MESSAGE_HANDLER);
 			break;
 		default:
 			break;

@@ -21,10 +21,8 @@ public class EnterPriseMainService extends CommonService {
 	public static List<EnterpriseMainBean> parseEnterPriseMain(String href,int pagerno) {
 		List<EnterpriseMainBean> list = new ArrayList<EnterpriseMainBean>();
 		try {
-			href = makeURL(href, new HashMap<String, Object>() {
-				{
-				}
-			});
+			 
+			href = href +"&pageNo="+pagerno;
 			Log.i(TAG, "url = " + href);
 
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
