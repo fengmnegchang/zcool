@@ -17,6 +17,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,7 +51,8 @@ public class ToSearchMainPullListFragment extends BaseV4Fragment<ToSearchMainJso
 	public List<ToSearchMainBean> list = new ArrayList<ToSearchMainBean>();
 	public ToSearchMainListAdapter mToSearchMainListAdapter;
 	public PullToRefreshListView mPullToRefreshListView;
-
+	public View headview;
+	
 	public static ToSearchMainPullListFragment newInstance(String url, boolean isVisibleToUser) {
 		ToSearchMainPullListFragment fragment = new ToSearchMainPullListFragment();
 		fragment.setFragment(fragment);
@@ -64,6 +66,7 @@ public class ToSearchMainPullListFragment extends BaseV4Fragment<ToSearchMainJso
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_common_pulllistview, container, false);
 		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
+		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_search_post_head, null);
 		return view;
 	}
 
@@ -76,6 +79,10 @@ public class ToSearchMainPullListFragment extends BaseV4Fragment<ToSearchMainJso
 	public void initValues() {
 		// TODO Auto-generated method stub
 		super.initValues();
+		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
+		Fragment hfragment = ToSearchMainMenuHeadFragment.newInstance(weakReferenceHandler,url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, hfragment).commit();
+		
 		mToSearchMainListAdapter = new ToSearchMainListAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mToSearchMainListAdapter);
 		mPullToRefreshListView.setMode(Mode.BOTH);
