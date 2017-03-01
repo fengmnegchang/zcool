@@ -28,7 +28,8 @@ import com.open.zcool.utils.UrlUtils;
 
 /**
  ***************************************************************************************************************************************************************************** 
- *  作品主列表
+ * 作品主列表
+ * 
  * @author :fengguangjing
  * @createTime:2017-2-3下午5:20:42
  * @version:4.2.4
@@ -38,7 +39,8 @@ import com.open.zcool.utils.UrlUtils;
  ***************************************************************************************************************************************************************************** 
  */
 public class WorksMainPullListFragment extends IndexMainPullListFragment {
-	 private View footview;
+	private View footview;
+	private View headview;
 
 	public static WorksMainPullListFragment newInstance(String url, boolean isVisibleToUser) {
 		WorksMainPullListFragment fragment = new WorksMainPullListFragment();
@@ -47,15 +49,17 @@ public class WorksMainPullListFragment extends IndexMainPullListFragment {
 		fragment.url = url;
 		return fragment;
 	}
-	
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_common_pulllistview, container, false);
 		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 		footview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_works_expend_footview, null);
+		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_search_post_head, null);
 		return view;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -64,24 +68,30 @@ public class WorksMainPullListFragment extends IndexMainPullListFragment {
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
+		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
 		mPullToRefreshListView.getRefreshableView().addFooterView(footview);
+		Fragment hfragment = SearchWorksHeadDropFragment.newInstance(weakReferenceHandler,url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, hfragment).commit();
+		
 		Fragment fragment = WorksFootExpendListFragment.newInstance(UrlUtils.ZCOOL_GUESS, true);
 		getChildFragmentManager().beginTransaction().replace(R.id.id_works_expend_foot, fragment).commit();
-		
+
 		mIndexMainListAdapter = new IndexMainListAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mIndexMainListAdapter);
 		mPullToRefreshListView.setMode(Mode.BOTH);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.open.enrz.fragment.BaseV4Fragment#call()
 	 */
 	@Override
 	public IndexMainJson call() throws Exception {
 		// TODO Auto-generated method stub
 		IndexMainJson mIndexMainJson = new IndexMainJson();
-		mIndexMainJson.setList(IndexMainListService.parseIndexMain(url,pageNo));
+		mIndexMainJson.setList(IndexMainListService.parseIndexMain(url, pageNo));
 		return mIndexMainJson;
 	}
-	 
+
 }
