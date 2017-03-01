@@ -30,6 +30,7 @@ import co.lujun.androidtagview.TagView.OnTagClickListener;
 
 import com.open.android.fragment.BaseV4Fragment;
 import com.open.zcool.R;
+import com.open.zcool.activity.ToSearchMainPullListFragmentActivity;
 import com.open.zcool.json.ToSearchJson;
 import com.open.zcool.jsoup.ToSearchService;
 
@@ -187,6 +188,8 @@ public class ToSearchFragment extends BaseV4Fragment<ToSearchJson, ToSearchFragm
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//http://www.zcool.com.cn/tosearch.do?world=背景
+		ToSearchMainPullListFragmentActivity.startToSearchMainPullListFragmentActivity(getActivity(), url+"world="+keys);
 	}
 
 	/*
