@@ -175,6 +175,13 @@
             android:description="@string/page_spinner_list_f_desp"
             >
         </activity>
+         <!-- 网站搜索  Indicator-->
+        <activity
+            android:name="com.open.zcool.activity.ToSearchMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/to_search_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
