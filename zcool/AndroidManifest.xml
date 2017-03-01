@@ -154,6 +154,13 @@
             android:description="@string/zcool_wokrs_search_head_drop_f_desp"
             >
         </activity>
+         <!-- 搜索-->
+        <activity
+            android:name="com.open.zcool.activity.ToSearchFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/to_search_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
