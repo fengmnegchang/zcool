@@ -22,4 +22,5 @@
 	<string name="zcool_wokrs_foot_expend_list_f_desp">作品底部推荐信息</string>
 	<string name="zcool_wokrs_search_head_drop_f_desp">作品头部搜索条件</string>
 	<string name="to_search_f_desp">搜索</string>
+	<string name="to_search_main_f_desp">搜索主列表</string>
 </resources>

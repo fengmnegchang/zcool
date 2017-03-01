@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/common_z" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageview"
+        android:layout_marginTop="8dp"
+        android:text="BJD企业站"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_blackLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_title"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_caaa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_blackLink"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textSize="14sp" />
+
+</RelativeLayout>

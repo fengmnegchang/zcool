@@ -161,6 +161,13 @@
             android:description="@string/to_search_f_desp"
             >
         </activity>
+        <!--搜索主列表-->
+        <activity
+            android:name="com.open.zcool.activity.ToSearchMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/to_search_main_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
