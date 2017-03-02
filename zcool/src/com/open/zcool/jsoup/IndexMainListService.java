@@ -269,13 +269,18 @@ public class IndexMainListService extends CommonService {
 	public static List<IndexMainBean> parseArticleMain(String href, int pagerno) {
 		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
 		try {
-			 
+			 if(href.contains("!")){
+				//http://www.zcool.com.cn/articles/0!0!0!1!3!100!2!1/
+				 //http://www.zcool.com.cn/articles/0!0!0!1!3!100!2!2/
+				//http://www.zcool.com.cn/articles/0!0!0!0!0!0!4!1/
+				 //http://www.zcool.com.cn/articles/0!0!0!0!0!0!4!2/
+				 href = href.replace("1/", "")  + pagerno +"/";
+			 }else{
+				 //http://www.zcool.com.cn/articles
 				if (pagerno > 1) {
-					//http://www.zcool.com.cn/articles/0!0!0!0!0!200!1!1
-					//http://www.zcool.com.cn/articles/0!0!0!0!0!200!1!2
-					href = href + "0!0!0!0!0!200!1!" + pagerno ;
+					href = href + "0!0!0!0!0!200!1!" + pagerno +"/";
 				}
-			 
+			 }
 			Log.i(TAG, "url = " + href);
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
 			// System.out.println(doc.toString());

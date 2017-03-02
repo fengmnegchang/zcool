@@ -73,4 +73,56 @@ public class ToSearchMainTabService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<DesignerTabBean> parseArticleTab(String href) {
+		List<DesignerTabBean> list = new ArrayList<DesignerTabBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element globalnavElement = doc.select("div.camNavC").first();
+				Elements moduleElements = globalnavElement.select("a");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						DesignerTabBean sbean = new DesignerTabBean();
+						try {
+							/**
+							 <div class="camTitle">
+							<div class="camNavC"> <a href="/articles/"  class="selected">编辑精选文章</a>
+							<a href="/articles/0!0!0!1!3!100!2!1/" >近期热门推荐</a>
+							<a href="/articles/0!0!0!0!0!0!4!1/" >全部文章</a> 
+							</div>
+						</div>
+							 */
+							try {
+								Element aElement = moduleElements.get(i).select("a").first();
+								if (aElement != null) {
+									String title = aElement.text();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									 hrefa = UrlUtils.ZCOOL_HTTP+hrefa;
+									sbean.setHref(hrefa);
+									sbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						list.add(sbean);
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

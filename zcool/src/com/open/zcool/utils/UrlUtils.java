@@ -24,7 +24,8 @@ public class UrlUtils {
 	public static final String tencentAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36 QQBrowser/4.1.4132.400";
 	public static final String enrzAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36 QQBrowser/4.1.4132.400";
 	public static final String COOKIE = "__cfduid=df0a47eed3d6f56b0ce2b54928ced11051483189834; CNZZDATA1000003418=380336421-1483185838-%7C1483852222";
-	
+	/** pc 站酷HTTP**/
+	public static final String ZCOOL_HTTP = "http://www.zcool.com.cn";
 	/** pc 站酷首页**/
 	public static final String ZCOOL = "http://www.zcool.com.cn/";
 	/** pc 站酷Job**/
