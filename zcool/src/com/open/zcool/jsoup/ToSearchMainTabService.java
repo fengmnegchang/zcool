@@ -45,8 +45,12 @@ public class ToSearchMainTabService extends CommonService {
 								Element aElement = moduleElements.get(i).select("a").first();
 								if (aElement != null) {
 									String title = aElement.text();
+									String hrefa = aElement.attr("href");
 									Log.i(TAG, "i==" + i + ";title==" + title);
-									sbean.setHref(href);
+									if(!title.contains("正版图片")){
+										hrefa = UrlUtils.ZCOOL+hrefa;
+									} 
+									sbean.setHref(hrefa);
 									sbean.setTitle(title);
 								}
 							} catch (Exception e) {

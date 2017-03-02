@@ -43,7 +43,7 @@ public class ToSearchMainPullListFragmentActivity extends ZcoolCommonFragmentAct
 		if (getIntent().getStringExtra("URL") != null) {
 			url = getIntent().getStringExtra("URL");
 		} else {
-			url = UrlUtils.ZCOOL_TO_SEARCH;
+			url = UrlUtils.ZCOOL_TO_SEARCH+"world=";
 		}
 		addfragment();
 	}
@@ -56,7 +56,7 @@ public class ToSearchMainPullListFragmentActivity extends ZcoolCommonFragmentAct
 	@Override
 	public void addfragment() {
 		// TODO Auto-generated method stub
-		Fragment fragment = ToSearchMainPullListFragment.newInstance(url, true);
+		Fragment fragment = ToSearchMainPullListFragment.newInstance(url,0, true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.id_common_fragment, fragment).commit();
 	}
 

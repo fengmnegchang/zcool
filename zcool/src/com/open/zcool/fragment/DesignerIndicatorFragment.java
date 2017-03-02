@@ -120,7 +120,6 @@ public class DesignerIndicatorFragment extends BaseV4Fragment<DesignerTabJson, D
 	@Override
 	public void handlerMessage(Message msg) {
 		// TODO Auto-generated method stub
-		super.handlerMessage(msg);
 		switch (msg.what) {
 		case MESSAGE_HANDLER:
 			doAsync(this, this, this);

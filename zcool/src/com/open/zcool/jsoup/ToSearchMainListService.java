@@ -11,7 +11,6 @@ import org.jsoup.select.Elements;
 import android.util.Log;
 
 import com.open.android.jsoup.CommonService;
-import com.open.zcool.bean.IndexMainBean;
 import com.open.zcool.bean.ToSearchMainBean;
 import com.open.zcool.utils.UrlUtils;
 
@@ -21,10 +20,11 @@ public class ToSearchMainListService extends CommonService {
 	public static List<ToSearchMainBean> parseIndexMain(String href, int pagerno) {
 		List<ToSearchMainBean> list = new ArrayList<ToSearchMainBean>();
 		try {
+			//http://www.zcool.com.cn/tosearch.do?page=0&world=
 			//http://www.zcool.com.cn/tosearch.do?
 			//http://www.zcool.com.cn/tosearch.do?page=0&world=&cateType=0&subcateType=0&channel=0&other=0&sort=0&uid=0&time=0&limit=10&recommend=0&p=2
 			if (pagerno > 1) {
-				href = href + "page=0&world=&cateType=0&subcateType=0&channel=0&other=0&sort=0&uid=0&time=0&limit=10&recommend=0&p=" + pagerno;
+				href = href + "&cateType=0&subcateType=0&channel=0&other=0&sort=0&uid=0&time=0&limit=10&recommend=0&p=" + pagerno;
 			}
 			Log.i(TAG, "url = " + href);
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
@@ -169,5 +169,93 @@ public class ToSearchMainListService extends CommonService {
 		return list;
 	}
 
-	 
+	public static List<ToSearchMainBean> parseDesignerMain(String href, int pagerno) {
+		List<ToSearchMainBean> list = new ArrayList<ToSearchMainBean>();
+		try {
+			//http://www.zcool.com.cn/tosearch.do?page=0&world=
+			//http://www.zcool.com.cn/tosearch.do?
+			//http://www.zcool.com.cn/tosearch.do?page=0&world=&cateType=0&subcateType=0&channel=0&other=0&sort=0&uid=0&time=0&limit=10&recommend=0&p=2
+			if (pagerno > 1) {
+				href = href + "&cateType=0&subcateType=0&channel=0&other=0&sort=0&uid=0&time=0&limit=10&recommend=0&p=" + pagerno;
+			}
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+ 				<li ot="" oi="">
+            	<a href="http://www.zcool.com.cn/u/562875" target="_blank" class="fLeft image-link">
+            		<img src="http://img.zcool.cn/community/04ffbc56a82f8b0000014dcf80aedd.jpg" 
+            		width="145" height="145" />
+            	</a>
+                <div class="atPersonS">
+                    <div>
+                    	<b><a href="http://www.zcool.com.cn/u/562875" target="_blank" 
+                    	class="c009cff f14">卓设电子商务</a></b>
+                    </div>
+							男
+                    	 <span class="c999">/</span> 泉州 <span class="c666">/</span> 平面设计师　粉丝：1690 原创：4140<br />
+                    <div class="c999">标签：</div>
+                    <div class="c999">简介：</div>
+                </div>
+                <a href="javascript:void(0)" onclick="follow(this,562875)"  title="添加关注"  class="apBtn  "></a>
+            </li>
+				 */
+				Element moduleElement = doc.select("ul.layout").first();
+				Elements moduleElements = moduleElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						ToSearchMainBean tbean = new ToSearchMainBean();
+						try {
+							try {
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							try {
+								Element picElement = moduleElements.get(i).select("a").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element camLiTitleCElement = moduleElements.get(i).nextElementSibling().select("div.atPersonS").first();
+								if (camLiTitleCElement != null) {
+									String blackLink = camLiTitleCElement.toString();
+									Log.i(TAG, "i==" + i + ";blackLink==" + blackLink);
+									tbean.setBlackLink(blackLink);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	} 
 }

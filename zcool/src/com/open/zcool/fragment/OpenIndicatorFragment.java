@@ -119,7 +119,6 @@ public class OpenIndicatorFragment extends BaseV4Fragment<OpenTabJson, OpenIndic
 	@Override
 	public void handlerMessage(Message msg) {
 		// TODO Auto-generated method stub
-		super.handlerMessage(msg);
 		switch (msg.what) {
 		case MESSAGE_HANDLER:
 			doAsync(this, this, this);

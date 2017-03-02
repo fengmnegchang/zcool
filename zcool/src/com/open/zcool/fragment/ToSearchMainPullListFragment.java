@@ -52,12 +52,14 @@ public class ToSearchMainPullListFragment extends BaseV4Fragment<ToSearchMainJso
 	public ToSearchMainListAdapter mToSearchMainListAdapter;
 	public PullToRefreshListView mPullToRefreshListView;
 	public View headview;
+	public int page;
 	
-	public static ToSearchMainPullListFragment newInstance(String url, boolean isVisibleToUser) {
+	public static ToSearchMainPullListFragment newInstance(String url, int page,boolean isVisibleToUser) {
 		ToSearchMainPullListFragment fragment = new ToSearchMainPullListFragment();
 		fragment.setFragment(fragment);
 		fragment.setUserVisibleHint(isVisibleToUser);
 		fragment.url = url;
+		fragment.page = page;
 		return fragment;
 	}
 

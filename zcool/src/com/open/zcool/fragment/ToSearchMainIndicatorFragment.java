@@ -18,7 +18,7 @@ import com.open.zcool.json.DesignerTabJson;
 import com.open.zcool.jsoup.ToSearchMainTabService;
 
 /**
- *****************************************************************************************************************************************************************************
+ ***************************************************************************************************************************************************************************** 
  * 
  * @author :fengguangjing
  * @createTime:2017-3-1下午4:53:03
@@ -26,7 +26,7 @@ import com.open.zcool.jsoup.ToSearchMainTabService;
  * @modifyTime:
  * @modifyAuthor:
  * @description:
- *****************************************************************************************************************************************************************************
+ ***************************************************************************************************************************************************************************** 
  */
 public class ToSearchMainIndicatorFragment extends DesignerIndicatorFragment {
 
@@ -57,10 +57,14 @@ public class ToSearchMainIndicatorFragment extends DesignerIndicatorFragment {
 		for (int i = 0; i < result.getList().size(); i++) {
 			DesignerTabBean bean = result.getList().get(i);
 			titleList.add(bean.getTitle());
-			if (i == 0) {
-				fragment = ToSearchMainPullListFragment.newInstance(bean.getHref(), true);
-			}  else {
-				fragment = ToSearchMainPullListFragment.newInstance(bean.getHref(), false);
+			if (bean.getTitle().contains("正版图片")) {
+				fragment = CommonWebViewFragment.newInstance(bean.getHref(), false);
+			} else if (bean.getTitle().contains("全站")) {
+				fragment = ToSearchMainPullListFragment.newInstance(bean.getHref(), i, true);
+			} else if (bean.getTitle().contains("设计师")) {
+				fragment = ToSearchPageDesignerMainPullListFragment.newInstance(bean.getHref(), i, false);
+			} else {
+				fragment = ToSearchMainPullListFragment.newInstance(bean.getHref(), i, false);
 			}
 			listRankFragment.add(fragment);
 		}

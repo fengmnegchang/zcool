@@ -42,7 +42,7 @@ public class ToSearchMainIndicatorFragmentActivity  extends ZcoolCommonFragmentA
 		if (getIntent().getStringExtra("URL") != null) {
 			url = getIntent().getStringExtra("URL");
 		} else {
-			url = UrlUtils.ZCOOL_TO_SEARCH;
+			url = UrlUtils.ZCOOL_TO_SEARCH+"world=";
 		}
 		addfragment();
 	}
