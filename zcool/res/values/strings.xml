@@ -25,4 +25,5 @@
 	<string name="to_search_main_f_desp">搜索主列表</string>
 	<string name="page_spinner_list_f_desp">pc分页数据wheel</string>
 	<string name="to_search_main_indicator_f_desp">网站搜索  Indicator</string>
+	<string name="zcool_articles_main_list_f_desp">文章主列表</string>
 </resources>

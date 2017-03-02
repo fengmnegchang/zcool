@@ -43,7 +43,8 @@ public class UrlUtils {
 	public static final String ZCOOL_GUESS = "http://www.zcool.com.cn/works/guess";
 	/**搜索***/
 	public static final String ZCOOL_TO_SEARCH = "http://www.zcool.com.cn/tosearch.do?";
-	
+	/** pc 文章**/
+	public static final String ZCOOL_ARTICLES = "http://www.zcool.com.cn/articles/";
 	
 	public static String getCookie(){
 		return COOKIE;

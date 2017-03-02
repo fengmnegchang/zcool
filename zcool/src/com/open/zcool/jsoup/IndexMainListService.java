@@ -265,4 +265,154 @@ public class IndexMainListService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<IndexMainBean> parseArticleMain(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			 
+				if (pagerno > 1) {
+					//http://www.zcool.com.cn/articles/0!0!0!0!0!200!1!1
+					//http://www.zcool.com.cn/articles/0!0!0!0!0!200!1!2
+					href = href + "0!0!0!0!0!200!1!" + pagerno ;
+				}
+			 
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+
+			/**
+			 * <li>
+								<a href="http://www.zcool.com.cn/article/ZNDczOTk2.html"  st_t="click" st_n="articles_main_pic"
+								   title="如何理性分析一个作品 by 左佐工作室" target="_blank" class="fLeft mr10 image-link">
+									<img src="http://img.zcool.cn/community/0321e9358b78495a801219c7769d4c3.jpg@250w_188h_1c_1e_2o_100sh.jpg" width="250" height="188" alt="如何理性分析一个作品 by 左佐工作室"/>
+								</a>
+								<div class="upJyBoxCon">
+									<div class="ujTitle"> <b><a href="http://www.zcool.com.cn/article/ZNDczOTk2.html"  st_t="click" st_n="articles_main_title"
+																title="如何理性分析一个作品 by 左佐工作室" target="_blank">如何理性分析一个作品</a></b>
+										 <span class="hotSpan lv3"></span> 
+									</div>
+									<div class="blackLink mt5">
+										<p class="c999"> <span style="color:#a6ce38;">设计文章</span> - <a href="/articles/707!708!0!0!0!200!1!1/" st_t="click" st_n="articles_main_cate"><font color="#666666">酷友观点/经验</font></a> - <a href="/articles/707!708!0!0!0!200!1!1/" st_t="click" st_n="articles_main_subcate"><font color="#666666">设计观点</font></a> <br/>
+											39分钟前上传 / <span class="cf30">1262</span> 人气 / <span class="cf30">11</span> 评论 / <span class="cf30">73</span> 推荐</p>
+										<p class="c999 mt5 ofHidden" style="height:63px;"></p>
+									</div>
+									<div class="right mt10 vm">
+										<a href="http://archerzuo.zcool.com.cn" title="左佐工作室" target="_blank" class="c999"> 左佐工作室 </a>
+										<a href="http://archerzuo.zcool.com.cn" title="左佐工作室" target="_blank" class="image-link">
+											<img src="http://img.zcool.cn/community/04449d553f53c300000199877a9271.jpg@48w_48h_2o_100sh.jpg" alt="左佐工作室" width="30" height="30" />
+										</a>
+									</div>
+								</div>
+							</li>
+						
+
+			 */
+			try {
+				Element globalnavElement = doc.select("div.upJyBox").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							try {
+								/**
+								 * <a href="http://www.zcool.com.cn/article/ZNDczOTk2.html"  st_t="click" st_n="articles_main_pic"
+								   title="如何理性分析一个作品 by 左佐工作室" target="_blank" class="fLeft mr10 image-link">
+									<img src="http://img.zcool.cn/community/0321e9358b78495a801219c7769d4c3.jpg@250w_188h_1c_1e_2o_100sh.jpg" width="250" height="188" alt="如何理性分析一个作品 by 左佐工作室"/>
+								</a>
+								 */
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+									String title = aElement.attr("title");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									tbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("a").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							/**
+							 * <div class="blackLink mt5">
+										<p class="c999"> <span style="color:#a6ce38;">设计文章</span> - <a href="/articles/707!708!0!0!0!200!1!1/" st_t="click" st_n="articles_main_cate"><font color="#666666">酷友观点/经验</font></a> - <a href="/articles/707!708!0!0!0!200!1!1/" st_t="click" st_n="articles_main_subcate"><font color="#666666">设计观点</font></a> <br/>
+											39分钟前上传 / <span class="cf30">1262</span> 人气 / <span class="cf30">11</span> 评论 / <span class="cf30">73</span> 推荐</p>
+										<p class="c999 mt5 ofHidden" style="height:63px;"></p>
+									</div>
+							 */
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("div.blackLink").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							/**
+							 * <div class="right mt10 vm">
+										<a href="http://archerzuo.zcool.com.cn" title="左佐工作室" target="_blank" class="c999"> 左佐工作室 </a>
+										<a href="http://archerzuo.zcool.com.cn" title="左佐工作室" target="_blank" class="image-link">
+											<img src="http://img.zcool.cn/community/04449d553f53c300000199877a9271.jpg@48w_48h_2o_100sh.jpg" alt="左佐工作室" width="30" height="30" />
+										</a>
+									</div>
+							 */
+							try {
+								Element rightElement = moduleElements.get(i).select("div.right").first();
+								if (rightElement != null) {
+									Element aElement = rightElement.select("a").first();
+									String author = aElement.text();
+									String authorhref = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";author==" + author+";authorhref="+authorhref);
+									tbean.setAuthor(author);
+									tbean.setAuthorhref(authorhref);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element rightElement = moduleElements.get(i).select("div.right").first();
+								if (rightElement != null) {
+									Element aElement = rightElement.select("img").first();
+									String authorIcons = aElement.attr("src");
+									Log.i(TAG, "i==" + i +  ";authorIcons==" + authorIcons);
+									tbean.setAuthorIcons(authorIcons);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
