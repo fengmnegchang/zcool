@@ -12,11 +12,11 @@
 package com.open.zcool.activity;
 
 import android.app.AlertDialog;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -48,7 +48,7 @@ public class ZcoolWebViewActivity extends CommonFragmentActivity {
 	public static final String TAG = ZcoolWebViewActivity.class.getSimpleName();
 	public WebView webview;
 	public String url = UrlUtils.ZCOOL;
-
+//	public String url = "http://192.168.1.15:8080/index.html#/goods";
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -71,6 +71,9 @@ public class ZcoolWebViewActivity extends CommonFragmentActivity {
 	protected void findView() {
 		// TODO Auto-generated method stub
 		webview = (WebView) findViewById(R.id.webview);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {   
+            webview.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+		}
 	}
 	/* (non-Javadoc)
 	 * @see com.open.enrz.activity.CommonFragmentActivity#bindEvent()

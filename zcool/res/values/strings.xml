@@ -27,4 +27,5 @@
 	<string name="to_search_main_indicator_f_desp">网站搜索  Indicator</string>
 	<string name="zcool_articles_main_list_f_desp">文章主列表</string>
 	<string name="articles_main_indicator_f_desp">文章 Indicator</string>
+	<string name="right_hot_articles_list_f_desp">本周热门文章</string>
 </resources>
