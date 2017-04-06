@@ -28,4 +28,5 @@
 	<string name="zcool_articles_main_list_f_desp">文章主列表</string>
 	<string name="articles_main_indicator_f_desp">文章 Indicator</string>
 	<string name="right_hot_articles_list_f_desp">本周热门文章</string>
+	<string name="month_hot_authors_list_f_desp">本月热门作者</string>
 </resources>

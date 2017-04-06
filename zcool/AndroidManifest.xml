@@ -203,6 +203,13 @@
             android:description="@string/right_hot_articles_list_f_desp"
             >
         </activity>
+        <!--本月热门作者-->
+        <activity
+            android:name="com.open.zcool.activity.MonthHotAuthorsListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/month_hot_authors_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
