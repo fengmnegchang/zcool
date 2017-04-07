@@ -210,6 +210,13 @@
             android:description="@string/month_hot_authors_list_f_desp"
             >
         </activity>
+        <!--pc 工具搜素材-->
+        <activity
+            android:name="com.open.zcool.activity.ToolsSearchSuCaiListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/tools_search_sucai_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

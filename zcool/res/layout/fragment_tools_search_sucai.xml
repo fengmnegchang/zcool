@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffba00"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff" >
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="102dp"
+            android:background="@drawable/edittext_shape" />
+
+        <Button
+            android:id="@+id/btn_search_p"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/edit_search"
+            android:background="#ffba00"
+            android:layout_toLeftOf="@+id/btn_search_img"
+            android:gravity="center"
+            android:text="搜图片" />
+        <Button
+            android:id="@+id/btn_search_img"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="3dp"
+            android:layout_alignBottom="@+id/edit_search"
+            android:layout_alignParentRight="true"
+            android:background="#ffba00"
+            android:gravity="center"
+            android:text="搜图标" />
+        
+         <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayoutmain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_search"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+
+        <TextView
+            android:id="@+id/txt_hot_keys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayoutmain"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="本周热词：" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayoutk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_hot_keys"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+
+        <TextView
+            android:id="@+id/txt_hot_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayoutk"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:text="热门图标：" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayoutimg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_hot_img"
+            android:layout_margin="0dp"
+            android:padding="10dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="true"
+            app:tag_enable_cross="false"
+            app:tag_theme="pure_teal"
+            app:vertical_interval="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
