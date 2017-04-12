@@ -30,4 +30,5 @@
 	<string name="right_hot_articles_list_f_desp">本周热门文章</string>
 	<string name="month_hot_authors_list_f_desp">本月热门作者</string>
 	<string name="tools_search_sucai_list_f_desp">工具搜素材</string>
+	<string name="tools_yesterday_collection_grid_list_f_desp">昨日收藏排行版</string>
 </resources>

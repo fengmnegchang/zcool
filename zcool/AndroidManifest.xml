@@ -217,6 +217,14 @@
             android:description="@string/tools_search_sucai_list_f_desp"
             >
         </activity>
+        <!--pc 昨日收藏排行版-->
+        <activity
+            android:name="com.open.zcool.activity.ToolsYesterdayCollectionGridAppCompatActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:theme="@style/AppCompat"
+            android:description="@string/tools_yesterday_collection_grid_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
