@@ -225,6 +225,20 @@
             android:description="@string/tools_yesterday_collection_grid_list_f_desp"
             >
         </activity>
+         <!-- 赛事列表-->
+        <activity
+            android:name="com.open.zcool.activity.EventMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/event_main_list_f_desp"
+            >
+        </activity>
+        <!-- 赛事 Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.EventMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/event_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

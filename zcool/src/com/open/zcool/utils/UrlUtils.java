@@ -48,6 +48,8 @@ public class UrlUtils {
 	public static final String ZCOOL_ARTICLES = "http://www.zcool.com.cn/articles/";
 	/** pc 工具搜素材**/
 	public static final String ZCOOL_SUCAI = "http://sucai.zcool.com.cn/";
+	/** 赛事列表**/
+	public static final String ZCOOL_EVENT = "http://www.zcool.com.cn/event/eventlist.do";
 	
 	public static String getCookie(){
 		return COOKIE;

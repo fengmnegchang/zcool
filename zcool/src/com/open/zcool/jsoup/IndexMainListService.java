@@ -420,4 +420,104 @@ public class IndexMainListService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<IndexMainBean> parseEventMain(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			  
+			 //http://www.zcool.com.cn/articles
+			if (pagerno > 1) {
+				if(href.contains("?status")){
+					href = href + "&p=" + pagerno ;
+				}else{
+					href = href + "?p=" + pagerno ;
+				}
+				
+			}
+			 
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+
+			/**
+			 *  <li>
+		          <span class="tongjiBar">
+		          <i class="iconpic iconpic-view"></i> 297121&nbsp;&nbsp;&nbsp;
+		          <i class="iconpic iconpic-user2"></i> 1044 &nbsp;&nbsp;&nbsp;
+		          <i class="iconpic iconpic-pic"></i> 764</span>
+		          <p class="f16"><b>
+		          <a href="http://www.zcool.com.cn/event/MXD2/"
+		           title="冒险造型师 - 冒险岛2&Paul Frank联名款服装图案设计征集" target="_blank">冒险造型师 - 冒险岛2&Paul Frank联名款服装图案设计征集</a></b>（进行中）</p>
+		          <p class="c999 mb10">投稿时间：<span class="cf30">2017-04-06</span> – <span class="cf30">2017-05-05</span></p>
+		          <p style="position:relative">
+			  	<span class="closing-date">距离截稿<br>日期还有<br><b>2</b>天</span>
+			  <a href="http://www.zcool.com.cn/event/MXD2/" title="冒险造型师 - 冒险岛2&Paul Frank联名款服装图案设计征集" target="_blank"><img src="http://img.zcool.cn/community/index/a1e858e49f5b0000017330072f5f.jpg" width="965" /></a></p>
+		        </li>
+			 */
+			try {
+				Element globalnavElement = doc.select("ul.activeList").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							try {
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+									String title = aElement.attr("title");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									tbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("img").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							/**
+							 
+							 */
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("p.f16").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							 
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
