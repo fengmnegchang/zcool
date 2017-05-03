@@ -33,4 +33,5 @@
 	<string name="tools_yesterday_collection_grid_list_f_desp">昨日收藏排行版</string>
 	<string name="event_main_list_f_desp">赛事列表</string>
 	<string name="event_main_indicator_f_desp">赛事Indicator</string>
+	<string name="activities_main_list_f_desp">活动列表</string>
 </resources>

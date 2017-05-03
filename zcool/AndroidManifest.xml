@@ -239,6 +239,13 @@
             android:description="@string/event_main_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        <!-- 活动列表-->
+        <activity
+            android:name="com.open.zcool.activity.ActivitiesMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/activities_main_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

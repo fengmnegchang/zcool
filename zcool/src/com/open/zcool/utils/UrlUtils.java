@@ -50,6 +50,8 @@ public class UrlUtils {
 	public static final String ZCOOL_SUCAI = "http://sucai.zcool.com.cn/";
 	/** 赛事列表**/
 	public static final String ZCOOL_EVENT = "http://www.zcool.com.cn/event/eventlist.do";
+	/** 活动列表**/
+	public static final String ZCOOL_ACTIVITIES = "http://www.zcool.com.cn/activities/";
 	
 	public static String getCookie(){
 		return COOKIE;
