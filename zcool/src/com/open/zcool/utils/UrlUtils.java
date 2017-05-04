@@ -53,7 +53,7 @@ public class UrlUtils {
 	/** 活动列表**/
 	public static final String ZCOOL_ACTIVITIES = "http://www.zcool.com.cn/activities/";
 	/** 酷友/设计师列表**/
-	public static final String ZCOOL_TO_DESIGNERS ="http://www.zcool.com.cn/toDesigners.do";
+	public static final String ZCOOL_TO_DESIGNERS ="http://www.zcool.com.cn/toDesigners.do?flag=1";
 	
 	public static String getCookie(){
 		return COOKIE;

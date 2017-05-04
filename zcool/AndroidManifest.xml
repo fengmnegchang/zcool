@@ -253,6 +253,13 @@
             android:description="@string/todesigners_main_list_f_desp"
             >
         </activity>
+        <!-- 酷友/设计师 Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.ToDesignersMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/todesigners_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

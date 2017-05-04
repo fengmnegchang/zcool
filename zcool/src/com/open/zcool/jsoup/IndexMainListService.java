@@ -600,7 +600,7 @@ public class IndexMainListService extends CommonService {
 		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
 		try {
 			 if(pagerno>1){
-				 href = href+"0!0!"+pagerno+"/";
+				 href = href+"&p="+pagerno;
 			 }
 			Log.i(TAG, "url = " + href);
 			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
