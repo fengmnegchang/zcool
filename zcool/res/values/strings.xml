@@ -34,4 +34,5 @@
 	<string name="event_main_list_f_desp">赛事列表</string>
 	<string name="event_main_indicator_f_desp">赛事Indicator</string>
 	<string name="activities_main_list_f_desp">活动列表</string>
+	<string name="todesigners_main_list_f_desp">酷友/设计师列表</string>
 </resources>

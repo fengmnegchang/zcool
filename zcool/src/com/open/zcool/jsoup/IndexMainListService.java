@@ -595,4 +595,128 @@ public class IndexMainListService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<IndexMainBean> parseToDesignersMain(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			 if(pagerno>1){
+				 href = href+"0!0!"+pagerno+"/";
+			 }
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 * <li>
+							<a href="http://www.zcool.com.cn/u/13051742" class="fLeft image-link" title="SUNRTEAM" target="_blank">
+								<img src="http://img.zcool.cn/community/043c2255472c3e0000019ae99ea4aa.jpg" width="145" height="145" />
+							</a>
+							<div class="atPerson">
+									<div class="vm">
+										<b><a href="http://www.zcool.com.cn/u/13051742" class="c4095ce f14" target="_blank">SUNRTEAM</a></b>
+						<a href="http://www.zcool.com.cn/toDesigners.do" class="image-link"
+						   target="_blank" title="推荐设计师"><img src="http://static.zcool.cn/z/images/svg/honor_tuijian_designer.svg" width="16" height="16" /></a>
+												</div> 男
+								<span class="c999">/</span>  天津市 <span class="c999">/</span> 其他　<br />
+								<div class="c999">
+									<p class="atPersonDes">QQ：86911208</p>
+								粉丝：<a href="http://www.zcool.com.cn/u/13051742/zcooler_fans.xhtml" class="c4095ce" target="_blank">449</a>　　
+									作品：<a href="http://www.zcool.com.cn/u/13051742" class="c4095ce" target="_blank">2</a><br />
+									</div>
+								</div>
+								<div class="atImg">
+									<a href="http://www.zcool.com.cn/work/ZNzE4OTA2NA==.html" target="_blank" class="image-link">
+										<img src="http://img.zcool.cn/community/031d38c5566c724000001cc299bb457.jpg@100w_75h_1c_1e_2o_100sh.jpg" width="100" height="75" /></a>
+									<a href="http://www.zcool.com.cn/work/ZNzEyMDQyNA==.html" target="_blank" class="image-link">
+										<img src="http://img.zcool.cn/community/031734a5566c765000001cc29c40946.jpg@100w_75h_1c_1e_2o_100sh.jpg" width="100" height="75" /></a>
+								</div>
+										<a href="javascript:void(0)"  onclick="follow(this,13051742)" title="添加关注" class="apBtn"></a>
+							</li>
+				 */
+				Element globalnavElement = doc.select("ul.layout").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							try {
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String title = aElement.attr("title");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									tbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element stampElement = moduleElements.get(i).select("div.vm").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("img").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							/**
+							 
+							 */
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("div.atPerson").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							 
+							
+							try {
+								Element rightElement = moduleElements.get(i).select("div.atImg").first();
+								if (rightElement != null) {
+									Element aElement = rightElement.select("img").first();
+									String authorIcons = aElement.attr("src");
+									Log.i(TAG, "i==" + i +  ";authorIcons==" + authorIcons);
+									tbean.setAuthorIcons(authorIcons);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
