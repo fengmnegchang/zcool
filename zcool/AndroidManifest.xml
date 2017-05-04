@@ -274,6 +274,20 @@
             android:description="@string/newest_comment_main_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        <!-- 专题 列表-->
+        <activity
+            android:name="com.open.zcool.activity.SpecialMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/special_list_f_desp"
+            >
+        </activity>
+          <!-- 专题  Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.SpecialMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/special_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

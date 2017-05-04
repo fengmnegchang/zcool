@@ -796,4 +796,95 @@ public class IndexMainListService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<IndexMainBean> parseSpecial(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			 if(pagerno>1){
+				 href = href+"&p="+pagerno;
+			 }
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 * <li>
+                	<a href="http://www.zcool.com.cn/special/ask2017second/" class="activeListMore" target="_blank"></a>
+                	<div class="alT">
+                    	<div class="alTBox"><a href="http://www.zcool.com.cn/special/ask2017second/" target="_blank">神回复第二期 | 你的酷问，大神酷答</a></div>
+                        <div class="c999 yh f14">2017-04-17</div>
+                    </div>
+                   <!--<div class="alContent">-->
+                    	<a href="http://www.zcool.com.cn/special/ask2017second/" title="神回复第二期 | 你的酷问，大神酷答" target="_blank"><img src="http://img.zcool.cn/community/index/a63958f6fdc000000148f0bc58c7.jpg" class="alContentImg" height="210"/></a>
+                        	<!--<span></span>-->
+                    <!--</div>-->
+                </li>
+           
+
+				 */
+				Element globalnavElement = doc.select("ul.activeList").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							 
+							
+							try {
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("img").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							/**
+							 
+							 */
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("div.alT").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							 
+							 
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

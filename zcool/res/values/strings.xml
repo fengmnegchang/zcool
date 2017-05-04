@@ -38,4 +38,6 @@
 	<string name="todesigners_main_indicator_f_desp">酷友/设计师Indicator</string>
 	<string name="newest_comment_main_list_f_desp">酷友精彩评论列表</string>
 	<string name="newest_comment_main_indicator_f_desp">酷友精彩评论Indicator</string>
+	<string name="special_list_f_desp">专题 列表</string>
+	<string name="special_main_indicator_f_desp">专题Indicator</string>
 </resources>

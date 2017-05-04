@@ -56,7 +56,8 @@ public class UrlUtils {
 	public static final String ZCOOL_TO_DESIGNERS ="http://www.zcool.com.cn/toDesigners.do?flag=1";
 	/**  酷友精彩评论列表**/
 	public static final String ZCOOL_NEWEST_COMMENT ="http://www.zcool.com.cn/newestComment.do";
-	
+	/** 专题 列表**/
+	public static final String ZCOOL_SPECIAL ="http://www.zcool.com.cn/special/speciallist.do?type=0";
 	
 	
 	public static String getCookie(){
