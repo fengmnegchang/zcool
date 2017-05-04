@@ -39,7 +39,7 @@ import com.open.zcool.utils.UrlUtils;
  ***************************************************************************************************************************************************************************** 
  */
 public class ToDesignersMainPullListFragment extends IndexMainPullListFragment {
-//	private View headview;
+	private View headview;
 
 	public static ToDesignersMainPullListFragment newInstance(String url, boolean isVisibleToUser) {
 		ToDesignersMainPullListFragment fragment = new ToDesignersMainPullListFragment();
@@ -54,7 +54,7 @@ public class ToDesignersMainPullListFragment extends IndexMainPullListFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_common_pulllistview, container, false);
 		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
-//		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_search_post_head, null);
+		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_search_post_head, null);
 		return view;
 	}
 
@@ -66,9 +66,9 @@ public class ToDesignersMainPullListFragment extends IndexMainPullListFragment {
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
-//		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
-//		Fragment hfragment = SearchWorksHeadDropFragment.newInstance(weakReferenceHandler, url, true);
-//		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, hfragment).commit();
+		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
+		Fragment hfragment = ToSearchMainMenuHeadFragment.newInstance(weakReferenceHandler, url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, hfragment).commit();
 
 		mIndexMainListAdapter = new IndexMainListAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mIndexMainListAdapter);
