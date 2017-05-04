@@ -719,4 +719,81 @@ public class IndexMainListService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<IndexMainBean> parseNewestMain(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			 if(pagerno>1){
+				 href = href+"?p="+pagerno;
+			 }
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+				Elements moduleElements = doc.select("div.recListLongRight");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							 
+							
+							try {
+								Element stampElement = moduleElements.get(i).select("a").first();
+								if (stampElement != null) {
+									Element aElement = stampElement.select("a").first();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("img").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							/**
+							 
+							 */
+							try {
+								Element camLiDesElement = moduleElements.get(i).nextElementSibling().select("div.recDes").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							 
+							 
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

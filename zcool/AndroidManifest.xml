@@ -260,6 +260,20 @@
             android:description="@string/todesigners_main_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        <!-- 酷友精彩评论列表-->
+        <activity
+            android:name="com.open.zcool.activity.NewestCommentMainPullListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/newest_comment_main_list_f_desp"
+            >
+        </activity>
+        <!-- 酷友精彩评论 Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.NewestCommentMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/newest_comment_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
