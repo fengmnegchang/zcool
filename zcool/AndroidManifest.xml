@@ -295,6 +295,13 @@
             android:description="@string/hellorf_search_f_desp"
             >
         </activity>
+        <!-- 海洛grid列表-->
+        <activity
+            android:name="com.open.zcool.activity.HellorfSearchGridFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_search_grid_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

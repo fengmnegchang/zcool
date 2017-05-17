@@ -41,4 +41,5 @@
 	<string name="special_list_f_desp">专题 列表</string>
 	<string name="special_main_indicator_f_desp">专题Indicator</string>
 	<string name="hellorf_search_f_desp">海洛搜索</string>
+	<string name="hellorf_search_grid_f_desp">海洛grid列表</string>
 </resources>

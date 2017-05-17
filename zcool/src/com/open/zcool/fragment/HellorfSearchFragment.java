@@ -12,6 +12,8 @@
 package com.open.zcool.fragment;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -26,8 +28,10 @@ import co.lujun.androidtagview.TagView.OnTagClickListener;
 
 import com.open.android.fragment.BaseV4Fragment;
 import com.open.zcool.R;
+import com.open.zcool.activity.HellorfSearchGridFragmentActivity;
 import com.open.zcool.json.ToSearchJson;
 import com.open.zcool.jsoup.HellorfSearchService;
+import com.open.zcool.utils.UrlUtils;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -44,7 +48,8 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	public EditText edit_search;
 	public Button btn_search;
 	public TagContainerLayout tagcontainerLayouto;
-
+	private List<String> plist= new ArrayList<String>();//推荐您搜素材
+	
 	public static HellorfSearchFragment newInstance(String url, boolean isVisibleToUser) {
 		HellorfSearchFragment fragment = new HellorfSearchFragment();
 		fragment.setFragment(fragment);
@@ -98,7 +103,8 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 			@Override
 			public void onTagClick(int position, String text) {
 				// TODO Auto-generated method stub
-				startSearch(text);
+//				startSearch(text);
+				HellorfSearchGridFragmentActivity.startHellorfSearchGridFragmentActivity(getActivity(), plist.get(position));
 			}
 		});
 
@@ -146,12 +152,16 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 		// TODO Auto-generated method stub
 		super.onCallback(result);
 		tagcontainerLayouto.setTags(result.getOlist());
+		plist.clear();
+		plist.addAll(result.getPlist());
 
 	}
 
 	public void startSearch(String keys) {
 		try {
 			keys = URLEncoder.encode(keys, "UTF-8");
+			//http://www.hellorf.com/image/search/%E7%BE%8E%E5%A5%B3
+			HellorfSearchGridFragmentActivity.startHellorfSearchGridFragmentActivity(getActivity(),UrlUtils.HELLO_RF_SEARCH_IMAGE+keys);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

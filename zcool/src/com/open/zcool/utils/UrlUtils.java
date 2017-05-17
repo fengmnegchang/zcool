@@ -60,6 +60,10 @@ public class UrlUtils {
 	public static final String ZCOOL_SPECIAL ="http://www.zcool.com.cn/special/speciallist.do?type=0";
 	/**海洛搜索***/
 	public static final String HELLO_RF_SEARCH = "http://www.hellorf.com/";
+	/**海洛搜索列表***/
+	public static final String HELLO_RF_SEARCH_GRID = "http://www.hellorf.com/image/search?category=0";
+	/**海洛搜索图片地址***/
+	public static final String HELLO_RF_SEARCH_IMAGE = "http://www.hellorf.com/image/search/";
 	
 	public static String getCookie(){
 		return COOKIE;
