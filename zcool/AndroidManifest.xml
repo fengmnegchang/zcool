@@ -302,6 +302,13 @@
             android:description="@string/hellorf_search_grid_f_desp"
             >
         </activity>
+         <!-- 海洛创意Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.HellorfIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
