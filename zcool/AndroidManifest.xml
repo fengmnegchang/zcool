@@ -288,6 +288,13 @@
             android:description="@string/special_main_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        <!-- 海洛搜索-->
+        <activity
+            android:name="com.open.zcool.activity.HellorfSearchFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_search_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

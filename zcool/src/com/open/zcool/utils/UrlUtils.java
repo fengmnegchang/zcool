@@ -58,7 +58,8 @@ public class UrlUtils {
 	public static final String ZCOOL_NEWEST_COMMENT ="http://www.zcool.com.cn/newestComment.do";
 	/** 专题 列表**/
 	public static final String ZCOOL_SPECIAL ="http://www.zcool.com.cn/special/speciallist.do?type=0";
-	
+	/**海洛搜索***/
+	public static final String HELLO_RF_SEARCH = "http://www.hellorf.com/";
 	
 	public static String getCookie(){
 		return COOKIE;
