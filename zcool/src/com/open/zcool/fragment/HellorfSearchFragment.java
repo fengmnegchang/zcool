@@ -17,6 +17,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,8 @@ import co.lujun.androidtagview.TagView.OnTagClickListener;
 import com.open.android.fragment.BaseV4Fragment;
 import com.open.zcool.R;
 import com.open.zcool.activity.HellorfSearchGridFragmentActivity;
+import com.open.zcool.adapter.HellorfPagerAdapter;
+import com.open.zcool.bean.HellorfSearchBean;
 import com.open.zcool.json.ToSearchJson;
 import com.open.zcool.jsoup.HellorfSearchService;
 import com.open.zcool.utils.UrlUtils;
@@ -49,6 +52,9 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	public Button btn_search;
 	public TagContainerLayout tagcontainerLayouto;
 	private List<String> plist= new ArrayList<String>();//推荐您搜素材
+	private ViewPager mViewPager;
+	public List<HellorfSearchBean> list = new ArrayList<HellorfSearchBean>();
+	private HellorfPagerAdapter mHellorfPagerAdapter;
 	
 	public static HellorfSearchFragment newInstance(String url, boolean isVisibleToUser) {
 		HellorfSearchFragment fragment = new HellorfSearchFragment();
@@ -64,6 +70,7 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 		edit_search = (EditText) view.findViewById(R.id.edit_search);
 		btn_search = (Button) view.findViewById(R.id.btn_search);
 		tagcontainerLayouto = (TagContainerLayout) view.findViewById(R.id.tagcontainerLayouto);
+		mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
 		return view;
 	}
 
@@ -75,8 +82,8 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
-		super.initValues();
-
+		mHellorfPagerAdapter = new HellorfPagerAdapter(getActivity(), list);
+		mViewPager.setAdapter(mHellorfPagerAdapter);
 	}
 
 	/*
@@ -138,6 +145,7 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	public ToSearchJson call() throws Exception {
 		// TODO Auto-generated method stub
 		ToSearchJson mToSearchJson = HellorfSearchService.parseSearchHot(url);
+		mToSearchJson.setPagerlist(HellorfSearchService.parsePager(url));
 		return mToSearchJson;
 	}
 
@@ -155,6 +163,9 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 		plist.clear();
 		plist.addAll(result.getPlist());
 
+		list.clear();
+		list.addAll(result.getPagerlist());
+		mHellorfPagerAdapter.notifyDataSetChanged();
 	}
 
 	public void startSearch(String keys) {

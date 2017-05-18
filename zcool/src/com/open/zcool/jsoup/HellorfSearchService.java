@@ -141,4 +141,76 @@ public class HellorfSearchService extends CommonService {
 		 
 		return list;
 	}
+	
+	public static List<HellorfSearchBean> parsePager(String href) {
+		List<HellorfSearchBean> list = new ArrayList<HellorfSearchBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element moduleElement = doc.select("ul.index-pic-list").first();
+				Elements moduleElements = moduleElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						try {
+							/**
+							 *  <li>
+                    <span class="picbox">
+                    <a href="http://www.hellorf.com/inspiration/cyberpunk" target="_blank"><img src="http://ali.image.hellorf.com/crm/3020170417142381842.jpg"></a>
+                    </span>
+                    <span class="textbox">
+                    <a href="http://www.hellorf.com/inspiration/cyberpunk" target="_blank">cyberpunk</a>
+                    </span>
+							 */
+							HellorfSearchBean bean = new HellorfSearchBean();
+							try {
+								Element aElement = moduleElements.get(i).select("a").first();
+								if (aElement != null) {
+									 
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+									bean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element aElement = moduleElements.get(i).select("img").first();
+								if (aElement != null) {
+									String src = aElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									bean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element aElement = moduleElements.get(i).select("a").get(1);
+								if (aElement != null) {
+									String titlea = aElement.text();
+									Log.i(TAG, "i==" + i + ";titlea==" + titlea);
+									bean.setTitle(titlea);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							list.add(bean);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return list;
+	}
 }

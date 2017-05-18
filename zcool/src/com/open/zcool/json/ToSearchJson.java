@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.open.android.json.CommonJson;
+import com.open.zcool.bean.HellorfSearchBean;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -31,6 +32,8 @@ public class ToSearchJson extends CommonJson {
 	private List<String> olist = new ArrayList<String>();//推荐您搜原创
 	private List<String> mlist= new ArrayList<String>();//推荐您搜素材
 	private List<String> plist= new ArrayList<String>();//page条件
+	private List<HellorfSearchBean> pagerlist = new ArrayList<HellorfSearchBean>();
+	
 	public List<String> getOlist() {
 		return olist;
 	}
@@ -48,6 +51,12 @@ public class ToSearchJson extends CommonJson {
 	}
 	public void setPlist(List<String> plist) {
 		this.plist = plist;
+	}
+	public List<HellorfSearchBean> getPagerlist() {
+		return pagerlist;
+	}
+	public void setPagerlist(List<HellorfSearchBean> pagerlist) {
+		this.pagerlist = pagerlist;
 	}
 
 	 
