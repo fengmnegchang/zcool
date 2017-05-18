@@ -309,6 +309,13 @@
             android:description="@string/hellorf_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        <!-- 海洛旅游专题-->
+        <activity
+            android:name="com.open.zcool.activity.HellorfTravelCityFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_travel_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

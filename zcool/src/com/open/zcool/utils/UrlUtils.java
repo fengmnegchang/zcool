@@ -66,6 +66,8 @@ public class UrlUtils {
 	public static final String HELLO_RF_SEARCH_IMAGE = "http://www.hellorf.com/image/search/";
 	/**海洛搜索视频地址***/
 	public static final String HELLO_RF_SEARCH_VIDEO = "http://www.hellorf.com/video/search/";
+	/**海洛旅游专题***/
+	public static final String HELLO_RF_TRAVEL = "http://www.hellorf.com/image/travel";
 	
 	public static String getCookie(){
 		return COOKIE;

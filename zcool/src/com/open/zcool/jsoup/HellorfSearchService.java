@@ -231,4 +231,76 @@ public class HellorfSearchService extends CommonService {
 		 
 		return list;
 	}
+	
+	public static List<HellorfSearchBean> parseTravel(String href) {
+		List<HellorfSearchBean> list = new ArrayList<HellorfSearchBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Elements moduleElements = doc.select("div.maskWraper");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						try {
+							/**
+							 <div class="item maskWraper" style="left:0; top:0; width:400px; height:268px"> 
+                <a href="http://www.hellorf.com/image/travel/6943" target="_blank">
+                    <img src="http://static.hellorf.com/v2.0.1.3/hellorf/images/lvyou/view_6943.jpg" width="400" height="268">
+                </a>
+                <div class="maskBar">
+                    <div class="text-l f-16">青海 - 青海湖</div>
+                </div>
+            </div>
+							 */
+							HellorfSearchBean bean = new HellorfSearchBean();
+							try {
+								Element aElement = moduleElements.get(i).select("a").first();
+								if (aElement != null) {
+									 
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+									bean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element aElement = moduleElements.get(i).select("img").first();
+								if (aElement != null) {
+									String src = aElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									bean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								Element aElement = moduleElements.get(i).select("div.maskBar").first();
+								if (aElement != null) {
+									String titlea = aElement.text();
+									Log.i(TAG, "i==" + i + ";titlea==" + titlea);
+									bean.setTitle(titlea);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							list.add(bean);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return list;
+	}
 }
