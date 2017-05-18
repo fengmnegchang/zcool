@@ -44,4 +44,5 @@
 	<string name="hellorf_search_grid_f_desp">海洛grid列表</string>
 	<string name="hellorf_indicator_f_desp">海洛创意Indicator</string>
 	<string name="hellorf_travel_f_desp">海洛旅游专题</string>
+	<string name="hellorf_travel_city_list_f_desp">海洛旅游城市</string>
 </resources>
