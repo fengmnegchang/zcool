@@ -28,7 +28,12 @@ public class HellorfSearchService extends CommonService {
 			// System.out.println(doc.toString());
 			try {
 				Element moduleElement = doc.select("ul.index-fenlei-list").first();
-				Elements moduleElements = moduleElement.select("li");
+				Elements moduleElements;
+				if(moduleElement==null){
+					moduleElements = doc.select("li.text-overflow");
+				}else{
+					moduleElements = moduleElement.select("li");
+				}
 				if (moduleElements != null && moduleElements.size() > 0) {
 					for (int i = 0; i < moduleElements.size(); i++) {
 						try {
@@ -95,7 +100,13 @@ public class HellorfSearchService extends CommonService {
 			 */
 			try {
 				Element moduleElement = doc.select("div.imgList").first();
-				Elements moduleElements = moduleElement.select("div.imgItem");
+				Elements moduleElements = null;
+				if(moduleElement==null){
+					moduleElement = doc.select("ul.searchList").first();
+					moduleElements = moduleElement.select("li");
+				}else{
+					moduleElements = moduleElement.select("div.imgItem");
+				}
 				if (moduleElements != null && moduleElements.size() > 0) {
 					for (int i = 0; i < moduleElements.size(); i++) {
 						try {
@@ -120,6 +131,10 @@ public class HellorfSearchService extends CommonService {
 								if (aElement != null) {
 									String src = aElement.attr("data-preview");
 									Log.i(TAG, "i==" + i + ";src==" + src);
+									if(src==null || src.length()==0){
+//										src = aElement.attr("data-videoview");
+										src = aElement.select("img").first().attr("src");
+									}
 									bean.setSrc(src);
 								}
 							} catch (Exception e) {
@@ -150,6 +165,9 @@ public class HellorfSearchService extends CommonService {
 			// System.out.println(doc.toString());
 			try {
 				Element moduleElement = doc.select("ul.index-pic-list").first();
+				if(moduleElement==null){
+					moduleElement = doc.select("ul.index-category-list").first();
+				}
 				Elements moduleElements = moduleElement.select("li");
 				if (moduleElements != null && moduleElements.size() > 0) {
 					for (int i = 0; i < moduleElements.size(); i++) {

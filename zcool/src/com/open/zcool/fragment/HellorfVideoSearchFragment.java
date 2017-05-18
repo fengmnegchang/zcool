@@ -47,43 +47,13 @@ import com.open.zcool.utils.UrlUtils;
  * @description:
  ***************************************************************************************************************************************************************************** 
  */
-public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfSearchFragment> implements OnClickListener {
-	public EditText edit_search;
-	public Button btn_search;
-	public TagContainerLayout tagcontainerLayouto;
-	public List<String> plist= new ArrayList<String>();//推荐您搜素材
-	public ViewPager mViewPager;
-	public List<HellorfSearchBean> list = new ArrayList<HellorfSearchBean>();
-	public HellorfPagerAdapter mHellorfPagerAdapter;
-	
-	public static HellorfSearchFragment newInstance(String url, boolean isVisibleToUser) {
-		HellorfSearchFragment fragment = new HellorfSearchFragment();
+public class HellorfVideoSearchFragment extends HellorfSearchFragment {
+	public static HellorfVideoSearchFragment newInstance(String url, boolean isVisibleToUser) {
+		HellorfVideoSearchFragment fragment = new HellorfVideoSearchFragment();
 		fragment.setFragment(fragment);
 		fragment.setUserVisibleHint(isVisibleToUser);
 		fragment.url = url;
 		return fragment;
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_hellorf_search, container, false);
-		edit_search = (EditText) view.findViewById(R.id.edit_search);
-		btn_search = (Button) view.findViewById(R.id.btn_search);
-		tagcontainerLayouto = (TagContainerLayout) view.findViewById(R.id.tagcontainerLayouto);
-		mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-		return view;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.open.android.fragment.BaseV4Fragment#initValues()
-	 */
-	@Override
-	public void initValues() {
-		// TODO Auto-generated method stub
-		mHellorfPagerAdapter = new HellorfPagerAdapter(getActivity(), list);
-		mViewPager.setAdapter(mHellorfPagerAdapter);
 	}
 
 	/*
@@ -94,7 +64,6 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	@Override
 	public void bindEvent() {
 		// TODO Auto-generated method stub
-		super.bindEvent();
 		btn_search.setOnClickListener(this);
 		tagcontainerLayouto.setOnTagClickListener(new OnTagClickListener() {
 			@Override
@@ -116,25 +85,7 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 		});
 
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.open.android.activity.CommonFragmentActivity#onClick(android.view
-	 * .View)
-	 */
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.btn_search:
-			startSearch(edit_search.getText().toString());
-			break;
-		default:
-			break;
-		}
-	}
+ 
 
 	/*
 	 * (non-Javadoc)
@@ -158,7 +109,6 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 	@Override
 	public void onCallback(ToSearchJson result) {
 		// TODO Auto-generated method stub
-		super.onCallback(result);
 		tagcontainerLayouto.setTags(result.getOlist());
 		plist.clear();
 		plist.addAll(result.getPlist());
@@ -172,28 +122,12 @@ public class HellorfSearchFragment extends BaseV4Fragment<ToSearchJson, HellorfS
 		try {
 			keys = URLEncoder.encode(keys, "UTF-8");
 			//http://www.hellorf.com/image/search/%E7%BE%8E%E5%A5%B3
-			HellorfSearchGridFragmentActivity.startHellorfSearchGridFragmentActivity(getActivity(),UrlUtils.HELLO_RF_SEARCH_IMAGE+keys);
+			HellorfSearchGridFragmentActivity.startHellorfSearchGridFragmentActivity(getActivity(),UrlUtils.HELLO_RF_SEARCH_VIDEO+keys);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.open.tencenttv.BaseV4Fragment#handlerMessage(android.os.Message)
-	 */
-	@Override
-	public void handlerMessage(Message msg) {
-		// TODO Auto-generated method stub
-		super.handlerMessage(msg);
-		switch (msg.what) {
-		case MESSAGE_HANDLER:
-			doAsync(this, this, this);
-			break;
-		default:
-			break;
-		}
-	}
+ 
 
 }

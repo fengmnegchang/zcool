@@ -60,7 +60,7 @@ public class HellorfIndicatorFragment extends DesignerIndicatorFragment {
 			if (i == 0) {
 				fragment = HellorfSearchFragment.newInstance(bean.getHref(), true);
 			} else {
-				fragment = HellorfSearchFragment.newInstance(bean.getHref(), false);
+				fragment = HellorfVideoSearchFragment.newInstance(bean.getHref(), false);
 			}
 			listRankFragment.add(fragment);
 		}
