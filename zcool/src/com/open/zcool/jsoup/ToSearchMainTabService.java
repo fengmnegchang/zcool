@@ -268,4 +268,49 @@ public class ToSearchMainTabService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<DesignerTabBean> parseHellorfCityTab(String href) {
+		List<DesignerTabBean> list = new ArrayList<DesignerTabBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element globalnavElement = doc.select("div.tab-link").first();
+				Elements moduleElements = globalnavElement.select("a");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						DesignerTabBean sbean = new DesignerTabBean();
+						try {
+							try {
+								/**
+								 */
+								Element aElement = moduleElements.get(i).select("a").first();
+								if (aElement != null) {
+									String title = aElement.text();
+									String hrefa = aElement.attr("href");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									sbean.setHref(hrefa);
+									sbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						list.add(sbean);
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

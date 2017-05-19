@@ -14,15 +14,15 @@ package com.open.zcool.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.open.android.adapter.CommonAdapter;
 import com.open.zcool.R;
-import com.open.zcool.bean.AllBean;
+import com.open.zcool.activity.HellorfCityIndicatorFragmentActivity;
 import com.open.zcool.bean.TravelCityBean;
 import com.open.zcool.widget.PinnedSectionListView.PinnedSectionListAdapter;
 
@@ -66,7 +66,7 @@ public class TravelPinnedSectionListAdapter extends CommonAdapter<TravelCityBean
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		TravelCityBean bean = (TravelCityBean) getItem(position);
+		final TravelCityBean bean = (TravelCityBean) getItem(position);
 		View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_travel_item, null);
 		TextView text_name = (TextView) view.findViewById(R.id.title);
 		text_name.setTag("" + position);
@@ -75,6 +75,15 @@ public class TravelPinnedSectionListAdapter extends CommonAdapter<TravelCityBean
 			text_name.setBackgroundColor(mContext.getResources().getColor(COLORS[position%4]));
 		}
 		text_name.setText(bean.getName());
+		text_name.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (bean.getSectiontype() != SECTION) {
+					HellorfCityIndicatorFragmentActivity.startHellorfCityIndicatorFragmentActivity(mContext, bean.getHref());
+				}
+			}
+		});
 		return view;
 	}
 	

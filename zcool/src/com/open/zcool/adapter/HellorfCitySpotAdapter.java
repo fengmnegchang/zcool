@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.open.android.adapter.CommonAdapter;
 import com.open.zcool.R;
+import com.open.zcool.activity.HellorfSearchGridFragmentActivity;
 import com.open.zcool.activity.ZcoolWebViewActivity;
 import com.open.zcool.bean.CitySpotBean;
 
@@ -52,7 +53,8 @@ public class HellorfCitySpotAdapter extends CommonAdapter<CitySpotBean> {
 		text_name.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getHref());
+//				ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getHref());
+				HellorfSearchGridFragmentActivity.startHellorfSearchGridFragmentActivity(mContext, bean.getHref());
 			}
 		});
 		return view;
