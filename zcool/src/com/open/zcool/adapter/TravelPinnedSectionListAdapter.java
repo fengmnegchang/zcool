@@ -21,10 +21,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.open.android.adapter.CommonAdapter;
+import com.open.android.view.PinnedSectionListView.PinnedSectionListAdapter;
 import com.open.zcool.R;
 import com.open.zcool.activity.HellorfCityIndicatorFragmentActivity;
 import com.open.zcool.bean.TravelCityBean;
-import com.open.zcool.widget.PinnedSectionListView.PinnedSectionListAdapter;
 
 /**
  ***************************************************************************************************************************************************************************** 

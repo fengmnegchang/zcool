@@ -8,7 +8,7 @@
     android:background="#ffba00"
     >
 
- <com.open.zcool.widget.PinnedSectionListView
+ <com.open.android.view.PinnedSectionListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sectionlist"
     android:layout_width="match_parent"

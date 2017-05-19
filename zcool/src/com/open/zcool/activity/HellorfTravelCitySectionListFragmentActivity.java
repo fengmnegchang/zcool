@@ -23,18 +23,17 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.open.android.activity.CommonFragmentActivity;
+import com.open.android.view.PinnedSectionListView;
 import com.open.zcool.R;
 import com.open.zcool.adapter.TravelPinnedSectionListAdapter;
 import com.open.zcool.bean.TravelCityBean;
 import com.open.zcool.json.TravelGroupJson;
 import com.open.zcool.jsoup.TravelService;
 import com.open.zcool.utils.UrlUtils;
-import com.open.zcool.widget.PinnedSectionListView;
 
 /**
  ***************************************************************************************************************************************************************************** 

@@ -25,12 +25,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.open.android.fragment.BaseV4Fragment;
+import com.open.android.view.PinnedSectionListView;
 import com.open.zcool.R;
 import com.open.zcool.adapter.TravelPinnedSectionListAdapter;
 import com.open.zcool.bean.TravelCityBean;
 import com.open.zcool.json.TravelGroupJson;
 import com.open.zcool.jsoup.TravelService;
-import com.open.zcool.widget.PinnedSectionListView;
 
 /**
  *****************************************************************************************************************************************************************************

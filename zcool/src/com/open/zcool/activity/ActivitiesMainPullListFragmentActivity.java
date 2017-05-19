@@ -13,6 +13,8 @@ package com.open.zcool.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 
 import com.open.zcool.R;
@@ -46,6 +48,25 @@ public class ActivitiesMainPullListFragmentActivity extends ZcoolCommonFragmentA
 			url = UrlUtils.ZCOOL_ACTIVITIES;
 		}
 		addfragment();
+	}
+	 
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle arg0) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(arg0);
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle, android.os.PersistableBundle)
+	 */
+	@Override
+	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState, outPersistentState);
 	}
 
 	/*
