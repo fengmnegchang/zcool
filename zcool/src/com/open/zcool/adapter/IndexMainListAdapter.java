@@ -69,6 +69,14 @@ public class IndexMainListAdapter extends CommonAdapter<IndexMainBean> {
 		if (bean != null) {
 			viewHolder.text_author.setText(bean.getAuthor());
 			viewHolder.text_title.setText(bean.getTitle());
+			if(bean.getAuthor()==null || bean.getAuthor().length()==0){
+				viewHolder.text_author.setVisibility(View.GONE);
+				viewHolder.imageview2.setVisibility(View.GONE);
+			}else{
+				viewHolder.text_author.setVisibility(View.VISIBLE);
+				viewHolder.imageview2.setVisibility(View.VISIBLE);
+			}
+			
 			viewHolder.text_camLiDes.setText(Html.fromHtml(bean.getCamLiDes()));
 			viewHolder.text_camLiDes.setMovementMethod(LinkMovementMethod.getInstance());   
 			CharSequence text = viewHolder.text_camLiDes.getText();   

@@ -94,4 +94,71 @@ public class IndexFocusService extends CommonService {
 		}
 		return list;
 	}
+	
+	
+	public static List<IndexFocusBean> parseMIndex(String href) {
+		List<IndexFocusBean> list = new ArrayList<IndexFocusBean>();
+		try {
+			href = makeURL(href, new HashMap<String, Object>() {
+				{
+				}
+			});
+			Log.i(TAG, "url = " + href);
+
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element globalnavElement = doc.select("div.banner").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexFocusBean sbean = new IndexFocusBean();
+						try {
+							/**
+                    <li><span onclick="location.href='http://www.zcool.com.cn/event/wonderwoman/wap/'">
+                    <img _src="http://img.zcool.cn/community/focus/e376591e5250000001109664e343.jpg" 
+                    src="http://static.zcool.cn/v3.5.170516.4/zcool/client/image/blank.png"></span></li>
+                    <li>
+							 */
+							try {
+								Element aElement = moduleElements.get(i).select("span").first();
+								if (aElement != null) {
+									String hrefa = aElement.attr("onclick");
+									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+									sbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							try {
+								Element imgElement = moduleElements.get(i).select("img").first();
+								if (imgElement != null) {
+									String src = imgElement.attr("_src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									sbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							 
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						list.add(sbean);
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

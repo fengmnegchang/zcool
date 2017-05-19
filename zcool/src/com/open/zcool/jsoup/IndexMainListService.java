@@ -189,6 +189,87 @@ public class IndexMainListService extends CommonService {
 		return list;
 	}
 	
+	
+	public static List<IndexMainBean> parseMIndexMain(String href, int pagerno) {
+		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+
+			try {
+				Element globalnavElement = doc.select("div.pd-10").first();
+				Elements moduleElements = globalnavElement.select("li.item");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						IndexMainBean tbean = new IndexMainBean();
+						try {
+							 /**
+							  * 
+							<li class="cl item" onclick="location.href='http://m.zcool.com.cn/work/ZMjE5MjMzOTI=.html'">
+							    <div class="picbox"><img src="http://img.zcool.cn/community/03183a0591e8d37a80116defc575b9e.jpg@250w_188h_1c_1e_2o_100sh.jpg"></div>
+							    <div class="textbox">
+						            <h2>落灰</h2>
+							    </div>
+							    <p class="time">
+							    	红花HONGHUA
+							    </p>
+							    <p class="toolbar">
+							    	<span><i class="iconpic iconpic-view"></i> <span>154</span></span>
+							    	<span style="margin-left:20px"><i class="iconpic iconpic-zan"></i> <span>16</span></span>
+							    </p>
+							</li>
+							  */
+							try {
+					  
+								Element stampElement = moduleElements.get(i).select("li").first();
+								if (stampElement != null) {
+									String hrefa = stampElement.attr("onclick");
+									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
+									tbean.setHref(hrefa);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element picElement = moduleElements.get(i).select("img").first();
+								if (picElement != null) {
+									String src = picElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("li").first();
+								if (camLiDesElement != null) {
+									String camLiDes = camLiDesElement.toString();
+									Log.i(TAG, "i==" + i + ";camLiDes==" + camLiDes);
+									tbean.setCamLiDes(camLiDes);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static List<IndexMainBean> parseWorksFoot(String href) {
 		List<IndexMainBean> list = new ArrayList<IndexMainBean>();
 		try {

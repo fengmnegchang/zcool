@@ -18,9 +18,9 @@ import android.view.Window;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.open.android.fragment.CommonV4Fragment;
 import com.open.zcool.R;
-import com.open.zcool.fragment.m.MenuLeftFragment;
+import com.open.zcool.fragment.m.MIndexMainPullListFragment;
+import com.open.zcool.fragment.m.ZcoolMMainLeftMenuFragment;
 import com.open.zcool.utils.UrlUtils;
 
 /**
@@ -48,14 +48,15 @@ public class ZcoolMMainActivity extends SlidingFragmentActivity {
 
 		// url = "http://www.umei.cc/bizhitupian/diannaobizhi/7628.htm";
 		// Fragment fragment = UmeiArticlePagerFragment.newInstance(url, true);
-		Fragment fragment = CommonV4Fragment.newInstance(url,true);
+//		Fragment fragment = MIndexPagerFragment.newInstance(url,true);
+		Fragment fragment = MIndexMainPullListFragment.newInstance(url,true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.layout_viewpager, fragment).commit();
 	}
 
 	private void initRightMenu() {
 
 		setBehindContentView(R.layout.left_menu_frame);
-		getSupportFragmentManager().beginTransaction().replace(R.id.id_left_menu_frame,new MenuLeftFragment()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.id_left_menu_frame,ZcoolMMainLeftMenuFragment.newInstance(url, true)).commit();
 		SlidingMenu menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT);
 		// 设置触摸屏幕的模式
