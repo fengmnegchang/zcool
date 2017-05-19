@@ -323,6 +323,13 @@
             android:description="@string/hellorf_travel_city_list_f_desp"
             >
         </activity>
+        <!-- 海洛旅游城市fragment-->
+        <activity
+            android:name="com.open.zcool.activity.HellorfTravelCitySectionFragmentFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_travel_city_list_f_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
