@@ -48,4 +48,5 @@
 	<string name="hellorf_travel_city_list_f_f_desp">海洛旅游城市fragment</string>
 	<string name="hellorf_city_all_spot_list_f_desp">城市全部景点</string>
 	<string name="hellorf_city_indicator_f_desp">城市景点indicator</string>
+	<string name="zcool_m_main_f_desp">站酷m版</string>
 </resources>

@@ -344,6 +344,14 @@
             android:description="@string/hellorf_city_indicator_f_desp"
             android:theme="@style/Theme.PageIndicatorDefaults"  >
         </activity> 
+        
+       <!--站酷m版-->
+        <activity
+            android:name="com.open.zcool.activity.m.ZcoolMMainActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_m_main_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

@@ -71,6 +71,9 @@ public class UrlUtils {
 	/**城市全部景点***/
 	public static final String HELLO_RF_CITY_SPOT = "http://www.hellorf.com/image/travel/city/792";
 	
+	/*** m站酷移动版*/
+	public static final String ZCOOL_M = "http://m.zcool.com.cn/index.html";
+	
 	public static String getCookie(){
 		return COOKIE;
 	}
