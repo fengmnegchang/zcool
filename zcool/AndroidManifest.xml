@@ -330,6 +330,13 @@
             android:description="@string/hellorf_travel_city_list_f_f_desp"
             >
         </activity>
+         <!-- 城市全部景点-->
+        <activity
+            android:name="com.open.zcool.activity.HellorfCitySpotFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/hellorf_city_all_spot_list_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
