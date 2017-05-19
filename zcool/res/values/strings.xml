@@ -49,4 +49,5 @@
 	<string name="hellorf_city_all_spot_list_f_desp">城市全部景点</string>
 	<string name="hellorf_city_indicator_f_desp">城市景点indicator</string>
 	<string name="zcool_m_main_f_desp">站酷m版</string>
+	<string name="zcool_m_main_left_menu_f_desp">站酷m 左菜单</string>
 </resources>

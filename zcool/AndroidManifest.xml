@@ -352,6 +352,13 @@
             android:description="@string/zcool_m_main_f_desp"
             >
         </activity>
+        <!--站酷m 左菜单-->
+        <activity
+            android:name="com.open.zcool.activity.m.ZcoolMMainLeftMenuFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_m_main_left_menu_f_desp"
+            >
+        </activity>
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"
