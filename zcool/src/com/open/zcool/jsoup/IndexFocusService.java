@@ -123,7 +123,7 @@ public class IndexFocusService extends CommonService {
 							try {
 								Element aElement = moduleElements.get(i).select("span").first();
 								if (aElement != null) {
-									String hrefa = aElement.attr("onclick");
+									String hrefa = aElement.attr("onclick").replace("location.href='", "").replace("'", "");
 									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
 									sbean.setHref(hrefa);
 								}

@@ -224,7 +224,7 @@ public class IndexMainListService extends CommonService {
 					  
 								Element stampElement = moduleElements.get(i).select("li").first();
 								if (stampElement != null) {
-									String hrefa = stampElement.attr("onclick");
+									String hrefa = stampElement.attr("onclick").replace("location.href='", "").replace("'", "");
 									Log.i(TAG, "i==" + i +  ";hrefa==" + hrefa);
 									tbean.setHref(hrefa);
 								}
