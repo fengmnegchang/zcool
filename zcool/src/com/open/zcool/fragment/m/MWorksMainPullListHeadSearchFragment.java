@@ -12,14 +12,17 @@
 package com.open.zcool.fragment.m;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.jayfang.dropdownmenu.MenuBean;
 import com.open.zcool.R;
 import com.open.zcool.adapter.IndexMainListAdapter;
 import com.open.zcool.fragment.IndexMainPullListFragment;
@@ -65,7 +68,7 @@ public class MWorksMainPullListHeadSearchFragment extends IndexMainPullListFragm
 	public void initValues() {
 		// TODO Auto-generated method stub
 		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
-		Fragment fragment = MSearchWorksMenuHeadFragment.newInstance(null,url,true);
+		Fragment fragment = MSearchWorksMenuHeadFragment.newInstance(weakReferenceHandler,url,true);
 		getChildFragmentManager().beginTransaction().replace(R.id.id_search_post_head, fragment).commit();
 		
 		
@@ -84,5 +87,28 @@ public class MWorksMainPullListHeadSearchFragment extends IndexMainPullListFragm
 		mIndexMainJson.setList(IndexMainListService.parseMIndexMain(url,pageNo));
 		return mIndexMainJson;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.open.enrz.fragment.BaseV4Fragment#handlerMessage(android.os.Message)
+	 */
+	@Override
+	public void handlerMessage(Message msg) {
+		// TODO Auto-generated method stub
+		switch (msg.what) {
+		case MESSAGE_HANDLER:
+			doAsync(this, this, this);
+			break;
+		case MESSAGE_DROP_MENU_ITEM_SELECTED:
+			MenuBean menubean = (MenuBean) msg.obj;
+			Log.d(TAG, menubean.getHref());
+			url = menubean.getHref();
+			pageNo = 1;
+			doAsync(this, this, this);
+			break;
+		default:
+			break;
+		}
+	}
 }
