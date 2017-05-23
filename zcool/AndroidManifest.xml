@@ -350,6 +350,7 @@
             android:name="com.open.zcool.activity.m.ZcoolMMainActivity"
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/zcool_m_main_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
         <!--站酷m 左菜单-->
@@ -359,6 +360,13 @@
             android:description="@string/zcool_m_main_left_menu_f_desp"
             >
         </activity>
+         <!--m主页面Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.m.ZcoolMMainIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_m_main_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

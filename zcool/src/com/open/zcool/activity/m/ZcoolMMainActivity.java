@@ -19,7 +19,7 @@ import android.view.Window;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.open.zcool.R;
-import com.open.zcool.fragment.m.MIndexMainPullListFragment;
+import com.open.zcool.fragment.m.ZcoolMMainIndicatorFragment;
 import com.open.zcool.fragment.m.ZcoolMMainLeftMenuFragment;
 import com.open.zcool.utils.UrlUtils;
 
@@ -49,7 +49,7 @@ public class ZcoolMMainActivity extends SlidingFragmentActivity {
 		// url = "http://www.umei.cc/bizhitupian/diannaobizhi/7628.htm";
 		// Fragment fragment = UmeiArticlePagerFragment.newInstance(url, true);
 //		Fragment fragment = MIndexPagerFragment.newInstance(url,true);
-		Fragment fragment = MIndexMainPullListFragment.newInstance(url,true);
+		Fragment fragment = ZcoolMMainIndicatorFragment.newInstance(url,true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.layout_viewpager, fragment).commit();
 	}
 

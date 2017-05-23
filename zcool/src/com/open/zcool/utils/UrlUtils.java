@@ -74,6 +74,8 @@ public class UrlUtils {
 	/*** m站酷移动版*/
 	public static final String ZCOOL_M = "http://m.zcool.com.cn/index.html";
 	
+	public static final String ZCOOL_M_HOST = "http://m.zcool.com.cn";
+	
 	public static String getCookie(){
 		return COOKIE;
 	}
