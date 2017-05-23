@@ -60,7 +60,9 @@ public class ZcoolMMainIndicatorFragment  extends DesignerIndicatorFragment {
 			titleList.add(bean.getTitle());
 			if (i == 0) {
 				fragment = MIndexMainPullListFragment.newInstance(bean.getHref(), true);
-			} else {
+			}if (i == 1) {
+				fragment = MWorksMainPullListHeadSearchFragment.newInstance(bean.getHref(), false);
+			}  else {
 				fragment = MIndexMainPullListNoHeadFragment.newInstance(bean.getHref(), false);
 			}
 			listRankFragment.add(fragment);

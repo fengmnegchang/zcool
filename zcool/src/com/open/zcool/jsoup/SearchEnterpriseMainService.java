@@ -116,4 +116,69 @@ public class SearchEnterpriseMainService extends CommonService {
 		}
 		return items;
 	}
+	
+	
+	public static List<DropItemBean> parseMSearchWorks(String href) {
+		List<DropItemBean> items = new ArrayList<DropItemBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element moduleElement = doc.select("div.dropnav").first();
+				Elements moduleElements = moduleElement.select("div.dropnav");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					DropItemBean dropbean;
+					for (int i = 0; i < moduleElements.size(); i++) {
+						try {
+							try {
+								Element spanElement = moduleElements.get(i).select("div.dropnav").first();
+								if (spanElement != null) {
+									dropbean = new DropItemBean();
+									dropbean.setLabel("作品");
+									
+									List<MenuBean> menulist = new ArrayList<MenuBean>();
+									MenuBean menubean;
+									menubean = new MenuBean();
+									menubean.setMenuname("作品");
+									menulist.add(menubean);
+									
+									Element ulElement = moduleElements.get(i).select("div.dropnav").first();
+									if(ulElement!=null){
+										Elements liElements = ulElement.select("a");
+										for(int j=0;j<liElements.size();j++){
+											menubean = new MenuBean();
+											Element aElement = liElements.get(j).select("a").first();
+											String menuname = aElement.text();
+											String menuhref = aElement.attr("href");
+											Log.i(TAG, "i==" + i + ";j==" + j + ";menuname==" + menuname+";menuhref = "+menuhref);
+											menubean.setMenuname(menuname);
+											menubean.setHref(menuhref);
+											menulist.add(menubean);
+										}
+									}
+									if(dropbean.getTypehref()==null){
+										dropbean.setTypehref(menulist.get(1).getHref());
+									}
+									menulist.get(0).setHref(menulist.get(1).getHref());
+									dropbean.setMenulist(menulist);
+									items.add(dropbean);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
 }
