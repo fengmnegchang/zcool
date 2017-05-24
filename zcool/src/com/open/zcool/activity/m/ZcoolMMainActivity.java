@@ -80,5 +80,9 @@ public class ZcoolMMainActivity extends SlidingFragmentActivity {
 	public void showLeftMenu(View view) {
 		getSlidingMenu().showMenu();
 	}
+	
+	public void toSearch(View view) {
+		MSearchEditFragmentActivity.startMSearchEditFragmentActivity(this, url);
+	}
 
 }

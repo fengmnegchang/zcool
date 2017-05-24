@@ -78,6 +78,8 @@ public class UrlUtils {
 	public static final String ZCOOL_M_TO_SEARCH = "http://m.zcool.com.cn/tosearch.do?oType=0&world=%E7%BE%8E%E5%A5%B3&closeUrl=/articles/";
 	/*** m搜索加载分页*/
 	public static final String ZCOOL_M_TO_SEARCH_MORE = "http://m.zcool.com.cn/getMoreWapSearch.do?world=%E7%BE%8E%E5%A5%B3&";
+	/*** m搜索keys*/
+	public static final String ZCOOL_M_TO_SEARCH_EDIT = "http://m.zcool.com.cn/tosearch.do?";
 	
 	public static String getCookie(){
 		return COOKIE;

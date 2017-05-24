@@ -53,4 +53,5 @@
 	<string name="zcool_m_main_indicator_f_desp">m主页面Indicator</string>
 	<string name="zcool_m_to_search_f_desp">站酷m 搜索</string>
 	<string name="zcool_m_to_search_indicator_f_desp">站酷m 搜索Indicator</string>
+	<string name="zcool_m_search_edit_f_desp">m搜索输入</string>
 </resources>
