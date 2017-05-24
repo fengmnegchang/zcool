@@ -258,4 +258,105 @@ public class ToSearchMainListService extends CommonService {
 		}
 		return list;
 	} 
+	
+	public static List<ToSearchMainBean> parseMSearch(String href, int pagerno) {
+		List<ToSearchMainBean> list = new ArrayList<ToSearchMainBean>();
+		try {
+			Document doc;
+			if(pagerno==1){
+				 doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			}else{
+				 doc = Jsoup.parse(href);
+			}
+			Log.i(TAG, "url = " + href);
+			 
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 *  
+				 */
+//				Element moduleElement = doc.select("div.pd-10").first();
+				Elements moduleElements = doc.select("li.item");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						ToSearchMainBean tbean = new ToSearchMainBean();
+						try {
+							/**
+							 * <li class="cl item" onclick="location.href='http://m.zcool.com.cn/work/ZMjE5OTk3Njg=.html'">
+			    <div class="picbox"><img src="http://img.zcool.cn/community/0310821592505ffb5b3086ed46ee552.jpg@250w_188h_1c_1e_2o_100sh.jpg"></div>
+			    <div class="textbox">
+						<h2>
+							神奇女侠的100种美
+						</h2>
+			    </div>
+			    <p class="time">月岛_糖</p>
+			    <p class="toolbar">
+			    	<span><i class="iconpic iconpic-view"></i> <span>81</span></span>
+			    	<span style="margin-left:20px"><i class="iconpic iconpic-zan"></i> <span>0</span></span>
+			    </p>
+			</li>
+							 */
+							try {
+								Element stampElement = moduleElements.get(i).select("li.item").first();
+								if (stampElement != null) {
+									String hrefa = stampElement.attr("onclick");
+									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+									tbean.setHref(hrefa.replace("location.href='", "").replace("'", ""));
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							try {
+								Element picElement = moduleElements.get(i).select("div.picbox").first();
+								if (picElement != null) {
+									Element imgElement = picElement.select("img").first();
+									String src = imgElement.attr("src");
+									Log.i(TAG, "i==" + i + ";src==" + src);
+									tbean.setSrc(src);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							 
+							try {
+								Element camLiDesElement = moduleElements.get(i).select("p.time").first();
+								if (camLiDesElement != null) {
+									String title = camLiDesElement.text();
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									tbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+							try {
+								Element camLiTitleCElement = moduleElements.get(i).select("p.toolbar").first();
+								if (camLiTitleCElement != null) {
+									String blackLink = camLiTitleCElement.toString();
+									Log.i(TAG, "i==" + i + ";blackLink==" + blackLink);
+									tbean.setBlackLink(blackLink);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							 
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						list.add(tbean);
+
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

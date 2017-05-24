@@ -73,8 +73,11 @@ public class UrlUtils {
 	
 	/*** m站酷移动版*/
 	public static final String ZCOOL_M = "http://m.zcool.com.cn/index.html";
-	
 	public static final String ZCOOL_M_HOST = "http://m.zcool.com.cn";
+	/*** m搜索*/
+	public static final String ZCOOL_M_TO_SEARCH = "http://m.zcool.com.cn/tosearch.do?oType=0&world=%E7%BE%8E%E5%A5%B3&closeUrl=/articles/";
+	/*** m搜索加载分页*/
+	public static final String ZCOOL_M_TO_SEARCH_MORE = "http://m.zcool.com.cn/getMoreWapSearch.do?world=%E7%BE%8E%E5%A5%B3&";
 	
 	public static String getCookie(){
 		return COOKIE;

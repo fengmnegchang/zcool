@@ -51,4 +51,5 @@
 	<string name="zcool_m_main_f_desp">站酷m版</string>
 	<string name="zcool_m_main_left_menu_f_desp">站酷m 左菜单</string>
 	<string name="zcool_m_main_indicator_f_desp">m主页面Indicator</string>
+	<string name="zcool_m_to_search_f_desp">站酷m 搜索</string>
 </resources>
