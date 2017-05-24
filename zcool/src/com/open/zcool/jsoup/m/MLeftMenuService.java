@@ -60,7 +60,7 @@ public class MLeftMenuService extends CommonService {
 								if (aElement != null) {
 									String hrefa = aElement.attr("href");
 									Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
-									sbean.setHref(hrefa);
+									sbean.setHref(UrlUtils.ZCOOL_M_HOST+hrefa);
 									sbean.setTitle(aElement.text());
 								}
 							} catch (Exception e) {

@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.open.android.adapter.CommonAdapter;
 import com.open.zcool.R;
+import com.open.zcool.activity.ZcoolWebViewActivity;
 import com.open.zcool.bean.TravelCityBean;
 import com.open.zcool.bean.m.LeftMenuBean;
 
@@ -55,6 +56,7 @@ public class MMainLeftMenuAdapter extends CommonAdapter<LeftMenuBean> {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ZcoolWebViewActivity.startZcoolWebViewActivity(mContext, bean.getHref());
 			}
 		});
 		return view;
