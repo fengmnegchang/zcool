@@ -374,6 +374,13 @@
             android:description="@string/zcool_m_to_search_f_desp"
             >
         </activity>
+        <!--站酷m 搜索Indicator-->
+       <activity
+            android:name="com.open.zcool.activity.m.ZcoolMToSearchIndicatorFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/zcool_m_to_search_indicator_f_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"  >
+        </activity> 
          <!-- 所有类列表 -->
         <activity
             android:name="com.open.zcool.activity.ZcoolALLActivity"

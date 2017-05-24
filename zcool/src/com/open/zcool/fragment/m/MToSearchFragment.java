@@ -50,12 +50,12 @@ import com.open.zcool.utils.UrlUtils;
 public class MToSearchFragment extends ToSearchMainPullListFragment {
     public int oType=0;
     
-	public static MToSearchFragment newInstance(String url, int page, boolean isVisibleToUser) {
+	public static MToSearchFragment newInstance(String url, int oType, boolean isVisibleToUser) {
 		MToSearchFragment fragment = new MToSearchFragment();
 		fragment.setFragment(fragment);
 		fragment.setUserVisibleHint(isVisibleToUser);
 		fragment.url = url;
-		fragment.page = page;
+		fragment.oType = oType;
 		return fragment;
 	}
 	

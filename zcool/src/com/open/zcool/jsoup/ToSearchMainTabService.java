@@ -358,4 +358,49 @@ public class ToSearchMainTabService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<DesignerTabBean> parseMSearchTab(String href) {
+		List<DesignerTabBean> list = new ArrayList<DesignerTabBean>();
+		try {
+			Log.i(TAG, "url = " + href);
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.enrzAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				Element globalnavElement = doc.select("div.uchome-tab").first();
+				Elements moduleElements = globalnavElement.select("span");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						DesignerTabBean sbean = new DesignerTabBean();
+						try {
+							try {
+								/**
+								 */
+								Element aElement = moduleElements.get(i).select("span").first();
+								if (aElement != null) {
+									String title = aElement.text();
+									String hrefa = aElement.attr("onclick").replace("location.href='", "").replace("'", "");
+									Log.i(TAG, "i==" + i + ";title==" + title);
+									sbean.setHref(UrlUtils.ZCOOL_M_HOST+hrefa);
+									sbean.setTitle(title);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						list.add(sbean);
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
